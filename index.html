@@ -155,11 +155,13 @@
     <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
       <div class="premium-nav-group desktop-only">
         <button class="p-btn p-admin" onclick="openAdminLogin()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          Admin
+          <svg class="admin-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span class="btn-text">Admin</span>
+          <span class="arrow" style="display:none; margin-left:5px;">&rarr;</span>
         </button>
         <button class="p-btn p-jobready" onclick="openAuthPanel()">
-          Job Ready &rarr;
+          <span class="btn-text">Job Ready</span>
+          <span class="arrow" style="margin-left:5px;">&rarr;</span>
         </button>
       </div>
       <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu">

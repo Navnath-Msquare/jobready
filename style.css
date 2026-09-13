@@ -8356,3 +8356,23 @@ footer {
 @media (max-width: 992px) {
     .desktop-only { display: none !important; }
 }
+
+/* Interactive Hover Swap for Nav Buttons */
+.p-admin:hover {
+    background: linear-gradient(135deg, #0ea5e9, #6366f1) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.6) !important;
+}
+.p-admin:hover .arrow { display: inline !important; }
+.p-admin:hover .admin-icon { display: none !important; }
+
+.premium-nav-group:has(.p-admin:hover) .p-jobready {
+    background: transparent !important;
+    color: #475569 !important;
+    box-shadow: none !important;
+    transform: translateY(0) !important;
+}
+.premium-nav-group:has(.p-admin:hover) .p-jobready .arrow {
+    display: none !important;
+}
