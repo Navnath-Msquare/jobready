@@ -8453,7 +8453,7 @@ footer {
 /* Active State */
 .nav-link.active {
     color: #4f46e5 !important;
-    background: #e0e7ff !important;
+    background: transparent !important;
     font-weight: 800 !important;
     box-shadow: none !important;
 }
