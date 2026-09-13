@@ -8287,3 +8287,14 @@ footer {
     text-shadow: 0 0 30px rgba(99, 102, 241, 1) !important;
     transform: scale(1.2) rotate(8deg) !important;
 }
+
+
+/* =========================================================
+   Fixing Background on Step Numbers
+========================================================= */
+.hp-step-num {
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+}
