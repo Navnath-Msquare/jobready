@@ -934,7 +934,7 @@ function initHomePageState() {
             const btn = document.getElementById('navJrBtn');
             const lbl = document.getElementById('navBtnLabel');
             if (lbl) lbl.textContent = 'Dashboard';
-            if (btn) btn.onclick = function() { window.location.href = 'dashboard.html'; };
+            if (btn) btn.onclick = function() { window.location.href = 'skills.html'; };
             // Update hero card name
             const nameEl = document.getElementById('heroCardName');
             const initEl = document.getElementById('heroCardInitial');
