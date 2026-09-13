@@ -732,13 +732,29 @@ function populateAspAccountBanner() {
     const banner = document.getElementById("aspAccountBanner");
     const emailInput = document.getElementById("aspLoginEmail");
     if (!banner) return;
+    
+    let savedUserData = localStorage.getItem("jobreadyUser");
+    
+    // Check expiration before showing banner
+    if (savedUserData) {
+        try {
+            const user = JSON.parse(savedUserData);
+            if (user.registeredAt) {
+                const regTime = new Date(user.registeredAt).getTime();
+                const now = new Date().getTime();
+                if ((now - regTime) / (1000 * 60 * 60) >= 24) {
+                    localStorage.removeItem("jobreadyUser");
+                    savedUserData = null; // force empty state
+                }
+            }
+        } catch(e) {}
+    }
 
-    const savedUserData = localStorage.getItem("jobreadyUser");
     if (!savedUserData) {
-        banner.innerHTML = `
-            <div class="asp-notice-warn">
-                 <strong>No account found.</strong> Register first before logging in.
-                <a href="javascript:void(0)" onclick="switchTab('register')">Register here →</a>
+        banner.innerHTML = `<div class="info-banner error-banner">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                <strong>No account found or expired.</strong> Please register again.
+                <a href="javascript:void(0)" onclick="switchTab('register')">Register here &rarr;</a>
             </div>`;
     } else {
         try {
@@ -795,6 +811,21 @@ function handleJobReadyLogin(event, emailId, passId, btnId, msgId) {
 
         try {
             const user = JSON.parse(savedData);
+            
+            // Check 24-hour expiration
+            if (user.registeredAt) {
+                const regTime = new Date(user.registeredAt).getTime();
+                const now = new Date().getTime();
+                const hoursPassed = (now - regTime) / (1000 * 60 * 60);
+                
+                if (hoursPassed >= 24) {
+                    showJobReadyToast("Account Expired", "Your credentials have expired after 24 hours. Please register again.", "error");
+                    localStorage.removeItem("jobreadyUser");
+                    if(btn) { btn.innerHTML = 'Login'; btn.disabled = false; }
+                    setTimeout(() => { switchTab('register'); }, 1500);
+                    return;
+                }
+            }
             
             if (email !== user.email) {
                 showJobReadyToast("Login Failed", "Incorrect email address.", "error");
