@@ -8312,11 +8312,19 @@ footer {
     border-radius: 50px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.03);
     gap: 5px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Hidden on top of home page */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px) scale(0.9);
 }
 .navbar.scrolled .premium-nav-group {
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    /* Visible when scrolled / navigating to other sections */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
 }
 
 .p-btn {
@@ -8381,16 +8389,25 @@ footer {
    Premium Nav Links Hover Effect (Gadad Color)
 ========================================================= */
 .nav-link {
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    background: transparent !important;
+    color: #475569 !important;
 }
+
+/* Hover: Mast Gadad Button Style */
 .nav-link:hover {
     color: white !important;
-    background: linear-gradient(135deg, #0284c7, #4f46e5) !important;
-    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4) !important;
-    transform: translateY(-3px) scale(1.05) !important;
+    background: linear-gradient(135deg, #8b5cf6, #c026d3) !important; /* Mast Pink/Purple */
+    box-shadow: 0 4px 15px rgba(192, 38, 211, 0.4) !important;
+    transform: translateY(-2px) scale(1.05) !important;
+    border-radius: 30px !important;
 }
+
+/* Active State: No Button Background, just simple text indicator */
 .nav-link.active {
-    color: #4f46e5 !important;
-    background: #e0e7ff !important;
+    color: #c026d3 !important;
+    background: transparent !important;
     font-weight: 800 !important;
+    box-shadow: none !important;
 }
+
