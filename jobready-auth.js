@@ -1090,10 +1090,17 @@ function openAdminLogin() {
         modalOverlay.innerHTML = `
             <div style="background: white; padding: 40px; border-radius: 20px; width: 90%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); transform: translateY(30px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" id="adminLoginModalBox">
                 <div style="text-align: center; margin-bottom: 30px;">
-                    <div style="width: 60px; height: 60px; background: #e0f2fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                        <div class="jr-orbit-logo" style="transform: scale(1.1); margin-right: 10px;">
+                            <div class="jr-orbit-ring red-ring"></div>
+                            <div class="jr-orbit-ring blue-ring"></div>
+                            <div class="jr-orbit-text">JR</div>
+                        </div>
+                        <div style="text-align: left; line-height: 1.1;">
+                            <span style="font-weight: 900; font-size: 24px; color: #0f172a; font-family: 'Inter', sans-serif;">Job<span style="color:#0ea5e9;">Ready</span></span>
+                        </div>
                     </div>
-                    <h2 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 5px; font-family: 'Outfit', sans-serif;">Admin Security</h2>
+                    <h2 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 5px; font-family: 'Outfit', sans-serif;">Admin Panel</h2>
                     <p style="color: #64748b; font-size: 15px; font-family: 'Outfit', sans-serif;">Authorized personnel only</p>
                 </div>
                 <div style="margin-bottom: 20px;">
