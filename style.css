@@ -8298,3 +8298,61 @@ footer {
     -webkit-background-clip: border-box !important;
     background-clip: border-box !important;
 }
+
+/* =========================================================
+   Premium Nav Button Group
+========================================================= */
+.premium-nav-group {
+    display: flex;
+    align-items: center;
+    background: rgba(241, 245, 249, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    padding: 6px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+.navbar.scrolled .premium-nav-group {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.p-btn {
+    padding: 10px 22px;
+    border-radius: 40px;
+    font-weight: 800;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    letter-spacing: 0.5px;
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.p-admin {
+    background: transparent;
+    color: #475569;
+}
+.p-admin:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.p-jobready {
+    background: linear-gradient(135deg, #0ea5e9, #6366f1);
+    color: white;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+}
+.p-jobready:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.6);
+}
+
+@media (max-width: 992px) {
+    .desktop-only { display: none !important; }
+}
