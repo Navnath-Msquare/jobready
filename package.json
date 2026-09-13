@@ -1,0 +1,27 @@
+{
+  "name": "hacathon-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jobready-auth.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Navnath-Msquare/jobready.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Navnath-Msquare/jobready/issues"
+  },
+  "homepage": "https://github.com/Navnath-Msquare/jobready#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "nodemailer": "^10.0.9"
+  }
+}

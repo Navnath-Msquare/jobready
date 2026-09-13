@@ -15,7 +15,7 @@
 // Global Configuration
 const JOBREADY_CONFIG = {
     adminEmail: "komalkhatake50@gmail.com",
-    formSubmitEndpoint: "https://formsubmit.co/ajax/komalkhatake50@gmail.com",
+    formSubmitEndpoint: "http://localhost:3000/api/send-email", // Updated to local Node server
     appName: "Job Ready Platform",
     websiteUrl: window.location.origin || "http://localhost"
 };
@@ -380,6 +380,17 @@ Admin Email: komalkhatake50@gmail.com`;
         registeredAt: new Date().toISOString()
     };
     localStorage.setItem("jobreadyUser", JSON.stringify(userData));
+
+    // Admin Feature: Save to all users list
+    let allUsers = [];
+    try {
+        const stored = localStorage.getItem("jobreadyAllUsers");
+        if (stored) allUsers = JSON.parse(stored);
+    } catch(e) {}
+    // Add unique ID for table operations
+    userData.id = 'usr_' + Date.now();
+    allUsers.push(userData);
+    localStorage.setItem("jobreadyAllUsers", JSON.stringify(allUsers));
 
     // Restore button
     if (submitBtn) {
@@ -1028,3 +1039,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+// ==========================================
+// ADMIN LOGIN FLOW
+// ==========================================
+function openAdminLogin() {
+    const adminEmail = prompt("Enter Admin Email:");
+    if (adminEmail === null) return;
+    if (adminEmail !== "komalkhatake50@gmail.com") {
+        alert("Access Denied: Invalid Admin Email.");
+        return;
+    }
+    const adminPass = prompt("Enter Admin Password:");
+    if (adminPass === null) return;
+    if (adminPass !== "komal@123") {
+        alert("Access Denied: Invalid Admin Password.");
+        return;
+    }
+    // Success
+    localStorage.setItem("jobreadyAdminAuth", "true");
+    window.location.href = "admin.html";
+}
