@@ -1042,22 +1042,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ==========================================
-// ADMIN LOGIN FLOW
+// ADMIN LOGIN FLOW (CUSTOM MODAL)
 // ==========================================
 function openAdminLogin() {
-    const adminEmail = prompt("Enter Admin Email:");
-    if (adminEmail === null) return;
-    if (adminEmail !== "komalkhatake50@gmail.com") {
-        alert("Access Denied: Invalid Admin Email.");
+    let modalOverlay = document.getElementById("adminLoginModalOverlay");
+    if (!modalOverlay) {
+        modalOverlay = document.createElement("div");
+        modalOverlay.id = "adminLoginModalOverlay";
+        modalOverlay.style.cssText = `
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 999999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        `;
+        
+        modalOverlay.innerHTML = `
+            <div style="background: white; padding: 40px; border-radius: 20px; width: 90%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); transform: translateY(30px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" id="adminLoginModalBox">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="width: 60px; height: 60px; background: #e0f2fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h2 style="font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 5px; font-family: 'Outfit', sans-serif;">Admin Security</h2>
+                    <p style="color: #64748b; font-size: 15px; font-family: 'Outfit', sans-serif;">Authorized personnel only</p>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: #334155; font-family: 'Outfit', sans-serif;">Admin Email</label>
+                    <input type="email" id="adminAuthEmail" placeholder="komal...@gmail.com" style="width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 15px; font-family: 'Outfit', sans-serif; outline: none; transition: 0.3s;" onfocus="this.style.borderColor='#0ea5e9'" onblur="this.style.borderColor='#e2e8f0'">
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: #334155; font-family: 'Outfit', sans-serif;">Secret Password</label>
+                    <input type="password" id="adminAuthPass" placeholder="Enter secret key" style="width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 15px; font-family: 'Outfit', sans-serif; outline: none; transition: 0.3s;" onfocus="this.style.borderColor='#0ea5e9'" onblur="this.style.borderColor='#e2e8f0'">
+                </div>
+                <button onclick="submitAdminLogin()" style="width: 100%; background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; border: none; padding: 16px; border-radius: 10px; font-size: 17px; font-weight: bold; font-family: 'Outfit', sans-serif; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Unlock Dashboard</button>
+                <button onclick="closeAdminLogin()" style="width: 100%; background: transparent; color: #64748b; border: none; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 600; font-family: 'Outfit', sans-serif; cursor: pointer; margin-top: 10px; transition: 0.3s;" onmouseover="this.style.color='#0f172a'" onmouseout="this.style.color='#64748b'">Cancel</button>
+            </div>
+        `;
+        document.body.appendChild(modalOverlay);
+    }
+    
+    // Reset values
+    document.getElementById("adminAuthEmail").value = "";
+    document.getElementById("adminAuthPass").value = "";
+    
+    // Show modal with animation
+    setTimeout(() => {
+        modalOverlay.style.opacity = "1";
+        modalOverlay.style.pointerEvents = "all";
+        document.getElementById("adminLoginModalBox").style.transform = "translateY(0)";
+    }, 10);
+}
+
+function closeAdminLogin() {
+    const modalOverlay = document.getElementById("adminLoginModalOverlay");
+    if (modalOverlay) {
+        modalOverlay.style.opacity = "0";
+        modalOverlay.style.pointerEvents = "none";
+        document.getElementById("adminLoginModalBox").style.transform = "translateY(30px)";
+    }
+}
+
+function submitAdminLogin() {
+    const email = document.getElementById("adminAuthEmail").value.trim();
+    const pass = document.getElementById("adminAuthPass").value.trim();
+    const btn = event.target;
+    
+    if (email !== "komalkhatake50@gmail.com" || pass !== "komal@123") {
+        showJobReadyToast("Access Denied", "Invalid Admin Email or Password.", "error");
         return;
     }
-    const adminPass = prompt("Enter Admin Password:");
-    if (adminPass === null) return;
-    if (adminPass !== "komal@123") {
-        alert("Access Denied: Invalid Admin Password.");
-        return;
-    }
-    // Success
-    localStorage.setItem("jobreadyAdminAuth", "true");
-    window.location.href = "admin.html";
+    
+    btn.innerHTML = "Unlocking...";
+    btn.style.opacity = "0.8";
+    
+    setTimeout(() => {
+        localStorage.setItem("jobreadyAdminAuth", "true");
+        window.location.href = "admin.html";
+    }, 800);
 }
