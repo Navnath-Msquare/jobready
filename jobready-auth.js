@@ -330,6 +330,7 @@ Admin Email: komalkhatake50@gmail.com`;
         _autoresponse: autoResponseText,
         _template: "table",
         "Registered User Name": name,
+        email: email, // FormSubmit needs the exact key "email" to trigger the autoresponse
         "User Email": email,
         "Phone Number": phone,
         "Target Career Role": role,
@@ -742,51 +743,73 @@ function populateAspAccountBanner() {
     }
 }
 
+
+// Unified Login Handler
 function aspLoginUser(event) {
-    event.preventDefault();
-    const btn = document.getElementById("aspLoginBtn");
-    const msg = document.getElementById("aspLoginMsg");
-    const email = document.getElementById("aspLoginEmail").value.trim();
-    const password = document.getElementById("aspLoginPassword").value.trim();
+    handleJobReadyLogin(event, 'aspLoginEmail', 'aspLoginPassword', 'aspLoginBtn', 'aspLoginMsg');
+}
+
+function handleLogin(event) {
+    handleJobReadyLogin(event, 'loginEmail', 'loginPassword', 'loginBtn', 'loginMsg');
+}
+
+function handleJobReadyLogin(event, emailId, passId, btnId, msgId) {
+    if(event) event.preventDefault();
+    const btn = document.getElementById(btnId);
+    
+    const emailInput = document.getElementById(emailId);
+    const passInput = document.getElementById(passId);
+    
+    if(!emailInput || !passInput) return;
+    
+    const email = emailInput.value.trim();
+    const password = passInput.value.trim();
 
     if(!email || !password) return;
 
-    btn.innerHTML = '<span class="jr-spinner"></span> Checking...';
-    btn.disabled = true;
+    if(btn) {
+        btn.innerHTML = '<span class="jobready-spinner"></span> Checking...';
+        btn.disabled = true;
+    }
 
     setTimeout(() => {
-        const savedEmail = localStorage.getItem("jobready_reg_email");
-        const savedPass = localStorage.getItem("jobready_reg_password");
-
-        if (!savedEmail) {
+        // Read user data from localStorage (Saved during registration)
+        const savedData = localStorage.getItem("jobreadyUser");
+        
+        if (!savedData) {
             showJobReadyToast("Login Failed", "No account found. Please register first.", "error");
-            btn.innerHTML = '<span>Login to Dashboard</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-            btn.disabled = false;
+            if(btn) { btn.innerHTML = 'Login'; btn.disabled = false; }
             return;
         }
 
-        if (email !== savedEmail) {
-            showJobReadyToast("Login Failed", "Incorrect email address.", "error");
-            btn.innerHTML = '<span>Login to Dashboard</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-            btn.disabled = false;
-            return;
-        }
+        try {
+            const user = JSON.parse(savedData);
+            
+            if (email !== user.email) {
+                showJobReadyToast("Login Failed", "Incorrect email address.", "error");
+                if(btn) { btn.innerHTML = 'Login'; btn.disabled = false; }
+                return;
+            }
 
-        if (password !== savedPass) {
-            showJobReadyToast("Login Failed", "Incorrect password.", "error");
-            btn.innerHTML = '<span>Login to Dashboard</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-            btn.disabled = false;
-            return;
-        }
+            if (password !== user.password) {
+                showJobReadyToast("Login Failed", "Incorrect password.", "error");
+                if(btn) { btn.innerHTML = 'Login'; btn.disabled = false; }
+                return;
+            }
 
-        localStorage.setItem("jobready_reg_email", email);
-        localStorage.setItem("jobready_reg_password", finalPass);
-        localStorage.setItem("jobreadyLoggedIn", "true");
-        showJobReadyToast("Welcome Back!", "Login successful. Redirecting to dashboard...", "success");
-        setTimeout(() => {
-            window.location.href = "dashboard.html";
-        }, 1200);
-    }, 1000);
+            // Success
+            showJobReadyToast("Welcome Back!", "Redirecting to your dashboard...", "success");
+            
+            // Redirect after 1.5s
+            setTimeout(() => {
+                window.location.href = "dashboard.html";
+            }, 1500);
+            
+        } catch(e) {
+            showJobReadyToast("Error", "Data corruption. Please register again.", "error");
+            if(btn) { btn.innerHTML = 'Login'; btn.disabled = false; }
+        }
+    }, 1200);
 }
 
 // Mobile hamburger menu toggle

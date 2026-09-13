@@ -6979,7 +6979,7 @@ footer {
 .hp-testi-stars { color: #f59e0b; font-size: 14px; letter-spacing: 2px; margin-bottom: 12px; }
 .hp-testi-card > p { font-size: 13.5px; color: #475569; line-height: 1.65; font-style: italic; margin-bottom: 16px; }
 .hp-testi-author { display: flex; align-items: center; gap: 10px; }
-.hp-testi-avatar { width: 38px; height: 38px; border-radius: 12px; display: flex; align-items: center; justify-content: flex-start; font-weight: 900; color: #fff; font-size: 15px; flex-shrink: 0; }
+.hp-testi-avatar { width: 38px; height: 38px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; font-size: 15px; flex-shrink: 0; }
 .hp-testi-author strong { font-size: 13px; font-weight: 800; color: #0f172a; display: block; }
 .hp-testi-author small  { font-size: 11.5px; color: #64748b; }
 
@@ -8193,4 +8193,77 @@ footer {
         border-radius: 8px !important;
         color: #2563eb !important;
     }
+}
+
+
+/* =========================================================
+   WhatsApp Floating Icon Fix 
+========================================================= */
+.floating-wa {
+    justify-content: center !important;
+}
+.floating-wa svg {
+    width: 32px !important;
+    height: 32px !important;
+    margin: 0 !important;
+}
+
+/* =========================================================
+   Step Numbers Darker/Bigger Fix (01, 02, 03, 04)
+========================================================= */
+.step-number {
+    color: #1e293b !important; /* Dark Slate Color */
+    font-size: 32px !important; /* Much bigger */
+    font-weight: 900 !important;
+    opacity: 0.15 !important; /* Dark but slightly transparent to act as watermark */
+    top: 10px !important;
+    right: 15px !important;
+}
+.hw-step:hover .step-number {
+    opacity: 0.4 !important;
+    color: #2563eb !important; /* Turns blue on hover */
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+
+/* =========================================================
+   Step Numbers Purple Blur Fix (01, 02, 03, 04)
+========================================================= */
+.step-number {
+    color: #9333ea !important; /* Vibrant Purple */
+    font-size: 44px !important; /* Bigger */
+    font-weight: 900 !important;
+    opacity: 0.7 !important; /* Solidly visible */
+    top: 5px !important;
+    right: 15px !important;
+    text-shadow: 0 0 12px rgba(147, 51, 234, 0.6) !important; /* Purple Blur glow */
+    z-index: 1 !important;
+}
+.hw-step:hover .step-number {
+    opacity: 1 !important;
+    color: #7e22ce !important; /* Darker purple */
+    text-shadow: 0 0 25px rgba(126, 34, 206, 0.9) !important; /* Stronger blur glow */
+    transform: scale(1.1) rotate(5deg) !important;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+
+/* =========================================================
+   Step Numbers Purple Blur Fix (.hp-step-num)
+========================================================= */
+.hp-step-num {
+    color: #9333ea !important; /* Vibrant Purple */
+    font-size: 44px !important; /* Bigger */
+    font-weight: 900 !important;
+    opacity: 0.7 !important; /* Solidly visible */
+    text-shadow: 0 0 12px rgba(147, 51, 234, 0.6) !important; /* Purple Blur glow */
+    z-index: 1 !important;
+    transition: all 0.3s ease !important;
+}
+.hp-step:hover .hp-step-num {
+    opacity: 1 !important;
+    color: #7e22ce !important; /* Darker purple */
+    text-shadow: 0 0 25px rgba(126, 34, 206, 0.9) !important; /* Stronger blur glow */
+    transform: scale(1.1) rotate(5deg) !important;
 }
