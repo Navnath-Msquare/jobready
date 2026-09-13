@@ -8313,18 +8313,12 @@ footer {
     box-shadow: 0 4px 15px rgba(0,0,0,0.03);
     gap: 5px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* Hidden on top of home page */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-15px) scale(0.9);
+
 }
 .navbar.scrolled .premium-nav-group {
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    /* Visible when scrolled / navigating to other sections */
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
+
 }
 
 .p-btn {
