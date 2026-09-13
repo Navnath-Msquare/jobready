@@ -8267,3 +8267,23 @@ footer {
     text-shadow: 0 0 25px rgba(126, 34, 206, 0.9) !important; /* Stronger blur glow */
     transform: scale(1.1) rotate(5deg) !important;
 }
+
+
+/* =========================================================
+   Step Numbers SOLID DARK FIX
+========================================================= */
+.hp-step-num {
+    color: #4f46e5 !important; /* Solid Deep Indigo/Blue */
+    font-size: 60px !important; /* Much bigger */
+    font-weight: 900 !important;
+    opacity: 1 !important; /* 100% Solidly visible */
+    text-shadow: 0 0 20px rgba(79, 70, 229, 0.7) !important; /* Strong Blue/Purple Glow */
+    z-index: 1 !important;
+    transition: all 0.3s ease !important;
+    -webkit-text-stroke: 1px #312e81 !important; /* Dark outline */
+}
+.hp-step:hover .hp-step-num {
+    color: #6366f1 !important;
+    text-shadow: 0 0 30px rgba(99, 102, 241, 1) !important;
+    transform: scale(1.2) rotate(8deg) !important;
+}
