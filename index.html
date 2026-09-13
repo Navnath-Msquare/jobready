@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Ready | From Student to Job-Ready</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='textGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%232563eb' /%3E%3Cstop offset='100%25' stop-color='%230ea5e9' /%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M 15 50 A 35 35 0 0 0 85 50' fill='none' stroke='%233b82f6' stroke-width='8' transform='rotate(-25 50 50)' /%3E%3Cpath d='M 15 50 A 35 35 0 0 1 85 50' fill='none' stroke='%23ef4444' stroke-width='8' transform='rotate(-25 50 50)' /%3E%3Ctext x='48' y='68' font-family='Arial Black, sans-serif' font-size='50' font-weight='900' font-style='italic' text-anchor='middle' fill='url(%23textGrad)'%3EJR%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Job Ready - Build your resume, close skill gaps, and find entry-level jobs. The all-in-one career platform for students and freshers.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ═══ GUARANTEED INLINE OVERRIDES ═══ */
+
+        /* Auth overlay & panel: ALWAYS fixed/hidden unless .active */
+        #authSlideOverlay {
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 9998 !important;
+            background: rgba(15,23,42,0.55) !important;
+            backdrop-filter: blur(5px) !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            transition: opacity 0.35s ease, visibility 0.35s ease !important;
+        }
+        #authSlideOverlay.active {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: all !important;
+        }
+        #authSlidePanel {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) scale(0.9) !important;
+            height: auto !important;
+            max-height: 90vh !important;
+            width: 650px !important;
+            max-width: 95vw !important;
+            background: #fff !important;
+            z-index: 9999 !important;
+            overflow-y: auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            box-shadow: 0 25px 80px rgba(15,23,42,0.3) !important;
+            border-radius: 16px !important;
+        }
+        #authSlidePanel.active {
+            transform: translate(-50%, -50%) scale(1) !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: all !important;
+        }
+
+        /* Navbar: compact proportionate layout */
+        .navbar nav { min-height: 68px !important; }
+        .jr-logo-badge {
+            width: 40px !important; height: 40px !important;
+            min-width: 40px !important; min-height: 40px !important;
+            max-width: 40px !important; max-height: 40px !important;
+            flex-shrink: 0 !important;
+        }
+        .jr-logo-badge svg { width: 40px !important; height: 40px !important; }
+        .jr-logo-name { font-size: 19px !important; }
+        .jr-logo-tag  { font-size: 9px !important; }
+        .nl-icon { display: none !important; }
+        .nav-link { font-size: 13.5px !important; padding: 6px 10px !important; }
+        .jr-cta-btn { padding: 9px 18px !important; font-size: 13.5px !important; }
+
+        /* Hidden utility */
+        .hidden { display: none !important; }
+    
+        /* Bulletproof Form Fixes (Injected) */
+        .asp-form-title h2 { font-size: 26px !important; font-weight: 800 !important; color: #0f172a !important; text-align: center !important; margin: 0 0 10px 0 !important; text-shadow: none !important; }
+        .asp-form-title p { font-size: 14px !important; color: #64748b !important; text-align: center !important; text-shadow: none !important; margin: 0 0 30px 0 !important; }
+        .asp-field label { display: block !important; font-size: 13px !important; font-weight: 700 !important; color: #334155 !important; margin-bottom: 8px !important; text-shadow: none !important; text-align: left !important; }
+        .asp-input-row input, .asp-input-row select {
+            width: 100% !important;
+            padding: 14px 16px !important;
+            font-size: 15px !important;
+            font-family: 'Inter', sans-serif !important;
+            color: #1e293b !important;
+            background-color: #f8fafc !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 10px !important;
+            box-sizing: border-box !important;
+            transition: all 0.25s ease !important;
+            height: 48px !important;
+        }
+        .asp-input-row input:focus, .asp-input-row select:focus {
+            outline: none !important;
+            background-color: #ffffff !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15) !important;
+        }
+        .asp-submit-btn {
+            width: 100% !important;
+            padding: 16px !important;
+            background: linear-gradient(135deg, #2563eb, #3b82f6) !important;
+            color: white !important;
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            border: none !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 10px !important;
+            margin-top: 25px !important;
+            margin-bottom: 10px !important;
+        }
+        
+        /* Hamburger Close Animation */
+        .hamburger-btn { transition: all 0.3s ease; }
+        .hamburger-btn span { transition: all 0.3s ease; transform-origin: center; }
+        .hamburger-btn.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+        .hamburger-btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+</style>
+</head>
+<body>
+
+<!-- =========== NAVBAR =========== -->
+<header class="navbar" id="mainNavbar">
+  <nav>
+    <a href="index.html" class="jr-logo" id="logoLink">
+      <div class="jr-orbit-logo">
+      <div class="jr-orbit-ring red-ring"></div>
+      <div class="jr-orbit-ring blue-ring"></div>
+      <div class="jr-orbit-text">JR</div>
+    </div>
+      <div class="jr-logo-text">
+        <span class="jr-logo-name">Job<span>Ready</span></span>
+        <span class="jr-logo-tag">Student to Hired</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="jobs.html" class="nav-link">Jobs</a></li>
+      <li><a href="skills.html" class="nav-link">Skills</a></li>
+      <li><a href="#contact" class="nav-link">Contact Us</a></li>
+      <li class="mobile-nav-btn-wrapper"><button class="jr-cta-btn mobile-nav-btn" onclick="openAuthPanel('register')" style="width:100%; justify-content:center; margin-top: 15px; padding: 12px 0;"><span style="color: white; font-weight: bold;">Job Ready</span></button></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <button type="button" class="jr-cta-btn" id="navJrBtn" onclick="openAuthPanel()">
+        <span class="jr-cta-icon"></span>
+        <span class="jr-cta-label" id="navBtnLabel">Job Ready</span>
+        <span class="jr-cta-arrow"></span>
+        <span class="jr-btn-glow"></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- =========== AUTH SLIDE PANEL =========== -->
+<div class="auth-slide-overlay" id="authSlideOverlay" onclick="closeAuthPanel()"></div>
+<aside class="auth-slide-panel" id="authSlidePanel">
+  <div class="asp-header">
+    <div class="jr-logo asp-logo">
+      <div class="jr-orbit-logo">
+      <div class="jr-orbit-ring red-ring"></div>
+      <div class="jr-orbit-ring blue-ring"></div>
+      <div class="jr-orbit-text">JR</div>
+    </div>
+      <div class="jr-logo-text"><span class="jr-logo-name">Job<span>Ready</span></span><span class="jr-logo-tag">Student to Hired</span></div>
+    </div>
+    <button class="asp-close-btn" onclick="closeAuthPanel()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="asp-tabs">
+    <button class="asp-tab active" id="tabLogin" onclick="switchTab('login')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>Login
+    </button>
+    <button class="asp-tab" id="tabRegister" onclick="switchTab('register')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 7a4 4 0 100 8 4 4 0 000-8zM20 8v6M23 11h-6"/></svg>Register
+    </button>
+    <div class="asp-tab-slider" id="aspTabSlider"></div>
+  </div>
+  <!-- Login Pane -->
+  <div class="asp-form-pane" id="paneLogin">
+    <div class="asp-form-title"><h2>Welcome Back! </h2><p>Login using your registered email &amp; password.</p></div>
+    <div id="aspAccountBanner"></div>
+    <form onsubmit="aspLoginUser(event)">
+      <div class="asp-field"><label for="aspLoginEmail">Email Address</label><div class="asp-input-row"><span class="asp-field-icon"></span><input type="email" id="aspLoginEmail" placeholder="your@email.com" required autocomplete="email"></div></div>
+      <div class="asp-field" style="margin-top:14px"><label for="aspLoginPassword">Password</label><div class="asp-input-row"><span class="asp-field-icon"></span><input type="password" id="aspLoginPassword" placeholder="Enter your password" required autocomplete="current-password"></div></div>
+      <button type="submit" class="asp-submit-btn" id="aspLoginBtn"><span>Login to Dashboard</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      <div id="aspLoginMsg"></div>
+    </form>
+    <p class="asp-switch-hint">No account yet? <button type="button" onclick="switchTab('register')">Register here &rarr;</button></p>
+  </div>
+  <!-- Register Pane -->
+  <div class="asp-form-pane hidden" id="paneRegister">
+    <div class="asp-form-title"><h2>Create Account </h2><p>Join Job Ready &mdash; your career journey starts here.</p></div>
+    
+    <form id="aspRegisterForm" onsubmit="handleJobReadyRegistration(event, 'aspRegisterForm')">
+      <div class="asp-field-grid">
+        <div class="asp-field"><label for="aspRegName">Full Name *</label><div class="asp-input-row"><span class="asp-field-icon"></span><input type="text" id="aspRegName" name="name" placeholder="Your full name" required></div></div>
+        <div class="asp-field"><label for="aspRegEmail">Email Address *</label><div class="asp-input-row"><span class="asp-field-icon"></span><input type="email" id="aspRegEmail" name="email" placeholder="your@email.com" required></div></div>
+                <div class="asp-field"><label for="aspRegAge">Age *</label><div class="asp-input-row"><span class="asp-field-icon"></span><input type="number" id="aspRegAge" name="age" placeholder="e.g. 21" required min="16" max="60"></div></div>
+        <div class="asp-field"><label for="aspRegCity">City *</label><div class="asp-input-row"><span class="asp-field-icon"></span><input type="text" id="aspRegCity" name="city" placeholder="e.g. Pune" required></div></div>
+<div class="asp-field"><label for="aspRegPhone">Phone Number</label><div class="asp-input-row"><span class="asp-field-icon"></span><input type="tel" id="aspRegPhone" name="phone" placeholder="9876543210"></div></div>
+        <div class="asp-field"><label for="aspRegRole">Target Role *</label><div class="asp-input-row"><span class="asp-field-icon"></span><select id="aspRegRole" name="role" required><option value="Frontend Developer">Frontend Developer</option><option value="Full Stack Developer">Full Stack Developer</option><option value="Backend Developer">Backend Developer</option><option value="Software Engineer">Software Engineer</option><option value="Python Developer">Python Developer</option><option value="Data Analyst / ML">Data Analyst / ML</option><option value="UI/UX Designer">UI/UX Designer</option><option value="Other">Other</option></select></div></div>
+        <div class="asp-field asp-field-full"><label for="aspRegEdu">Education / College</label><div class="asp-input-row"><span class="asp-field-icon"></span><input type="text" id="aspRegEdu" name="education" placeholder="B.Tech / BE Computer Science"></div></div>
+        <div class="asp-field asp-field-full"><div class="asp-auto-pwd-box"><div class="asp-auto-pwd-head"><span> Login Password</span><span class="asp-auto-tag"> Auto-Generated</span></div><p>Leave empty for auto-generated secure password sent to email, or type custom.</p><div class="asp-input-row"><span class="asp-field-icon"></span><input type="text" id="aspRegPassword" name="password" placeholder="Leave empty = auto-generate"></div></div></div>
+      </div>
+      <button type="submit" class="asp-submit-btn" id="aspRegisterBtn"><span>Register &amp; Send Emails</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </form>
+    <p class="asp-switch-hint">Already registered? <button type="button" onclick="switchTab('login')">Login here &rarr;</button></p>
+  </div>
+  <div class="asp-bottom-glow"></div>
+</aside>
+
+<!-- =========== HERO =========== -->
+<section class="hp-hero" id="home">
+    <!-- Background Slider -->
+    <div class="hp-hero-bg-slider">
+        <div class="slide bg-1"></div>
+        <div class="slide bg-2"></div>
+        <div class="slide bg-3"></div>
+        <div class="slide bg-4"></div>
+        <div class="bg-overlay"></div>
+    </div>
+
+  <div class="hp-orb hp-orb-1"></div><div class="hp-orb hp-orb-2"></div><div class="hp-orb hp-orb-3"></div>
+  <div class="hp-hero-inner">
+    <div class="hp-hero-left" data-scroll="fade-up">
+      <!-- Text Slides Container -->
+      <div class="hp-text-slider">
+          <div class="text-slide active">
+              <div class="hp-badge"><span class="hp-badge-dot"></span> India's #1 Student Career Platform</div>
+              <h1 class="hp-hero-h1">From Student<br><span class="hp-gradient-text">to Job-Ready.</span></h1>
+              <p class="hp-hero-desc">Build an ATS-winning resume, discover your skill gaps, get matched to real entry-level jobs. <strong>100% free. Start today.</strong></p>
+          </div>
+          <div class="text-slide">
+              <div class="hp-badge" style="border-color: #a855f7; color: #a855f7"><span class="hp-badge-dot" style="background: #a855f7"></span> Professional Resume Builder</div>
+              <h1 class="hp-hero-h1">Craft Your Perfect<br><span class="hp-gradient-text">ATS Resume.</span></h1>
+              <p class="hp-hero-desc">Use our smart templates to pass automated screening bots and showcase your skills effectively to top recruiters.</p>
+          </div>
+          <div class="text-slide">
+              <div class="hp-badge" style="border-color: #22c55e; color: #22c55e"><span class="hp-badge-dot" style="background: #22c55e"></span> Skill Gap Analysis</div>
+              <h1 class="hp-hero-h1">Master The Skills<br><span class="hp-gradient-text">Companies Want.</span></h1>
+              <p class="hp-hero-desc">Compare your current skills with industry demands. Get a personalized learning roadmap to get hired faster.</p>
+          </div>
+          <div class="text-slide">
+              <div class="hp-badge" style="border-color: #eab308; color: #eab308"><span class="hp-badge-dot" style="background: #eab308"></span> Real Job Matches</div>
+              <h1 class="hp-hero-h1">Find Your Dream<br><span class="hp-gradient-text">Entry-Level Job.</span></h1>
+              <p class="hp-hero-desc">Access exclusive fresher jobs. We match your verified skills directly with top tech companies across India.</p>
+          </div>
+      </div>
+
+      <div class="hp-hero-btns" id="heroBtnsGuest">
+        <button class="jr-cta-btn hp-hero-main-btn" onclick="openAuthPanel('register')"><span> Get Started Free</span><span class="jr-btn-glow"></span></button>
+        <button class="hp-login-outline-btn" onclick="openAuthPanel('login')"> Already registered? Login</button>
+      </div>
+      <div class="hp-hero-btns hidden" id="heroBtnsUser">
+        <a href="dashboard.html" class="jr-cta-btn hp-hero-main-btn"><span> Go to My Dashboard</span><span class="jr-btn-glow"></span></a>
+        <a href="resume.html" class="hp-login-outline-btn"> Build / Update Resume</a>
+      </div>
+      <div class="hp-trust-row">
+        <span class="hp-trust-item"> Student Friendly</span>
+        <span class="hp-trust-item"> Dual Email Alerts</span>
+        <span class="hp-trust-item"> 100% Free</span>
+      </div>
+    </div>
+    </div>
+</section>
+
+<!-- =========== STATS =========== -->
+<section class="hp-stats-section">
+  <div class="hp-stats-inner">
+    <div class="hp-stat-card" data-scroll="fade-up"><div class="hp-stat-num" data-target="2400">0</div><div class="hp-stat-plus">+</div><p>Students Registered</p></div>
+    <div class="hp-stat-card" data-scroll="fade-up"><div class="hp-stat-num" data-target="850">0</div><div class="hp-stat-plus">+</div><p>Resumes Created</p></div>
+    <div class="hp-stat-card" data-scroll="fade-up"><div class="hp-stat-num" data-target="320">0</div><div class="hp-stat-plus">+</div><p>Jobs Listed</p></div>
+    <div class="hp-stat-card" data-scroll="fade-up"><div class="hp-stat-num" data-target="92">0</div><div class="hp-stat-plus">%</div><p>Avg. ATS Score</p></div>
+  </div>
+</section>
+
+<!-- =========== FEATURES =========== -->
+<section class="hp-features" id="features">
+  <div class="hp-section-head" data-scroll="fade-up">
+    <span class="hp-label-chip">FEATURES</span>
+    <h2>Everything You Need to <span>Get Hired</span></h2>
+    <p>One platform built specifically for freshers &amp; college students in India.</p>
+  </div>
+  <div class="hp-features-grid">
+    <div class="hp-feat-card" data-scroll="fade-up"><div class="hp-feat-icon-box" style="background:linear-gradient(135deg,#dbeafe,#eff6ff);color:#1d4ed8"></div><h3>Resume Builder</h3><p>ATS-optimized resumes with live preview. Templates designed to pass automated screening bots.</p><a href="resume.html" class="hp-feat-link">Build Resume <span>&rarr;</span></a></div>
+    <div class="hp-feat-card" data-scroll="fade-up"><div class="hp-feat-icon-box" style="background:linear-gradient(135deg,#dcfce7,#f0fdf4);color:#15803d"></div><h3>Skill Gap Analysis</h3><p>Compare your skills vs what top companies demand. Get a personalized roadmap to close every gap.</p><a href="skills.html" class="hp-feat-link">Analyze Skills <span>&rarr;</span></a></div>
+    <div class="hp-feat-card" data-scroll="fade-up"><div class="hp-feat-icon-box" style="background:linear-gradient(135deg,#fef3c7,#fffbeb);color:#92400e"></div><h3>Job Portal</h3><p>Curated entry-level &amp; internship jobs for freshers. 0-1 year experience requirements only.</p><a href="jobs.html" class="hp-feat-link">Find Jobs <span>&rarr;</span></a></div>
+    <div class="hp-feat-card" data-scroll="fade-up"><div class="hp-feat-icon-box" style="background:linear-gradient(135deg,#f3e8ff,#faf5ff);color:#7c3aed"></div><h3>Learning Roadmaps</h3><p>Step-by-step career paths from semester 1 to offer letter. Know exactly what to learn and when.</p><a href="Roadmap.html" class="hp-feat-link">View Roadmaps <span>&rarr;</span></a></div>
+    <div class="hp-feat-card" data-scroll="fade-up"><div class="hp-feat-icon-box" style="background:linear-gradient(135deg,#fce7f3,#fdf2f8);color:#9d174d"></div><h3>Dual Email Alerts</h3><p>Instant registration confirmation to both you &amp; admin. Credentials delivered automatically.</p><a href="#" class="hp-feat-link" onclick="openAuthPanel('register');return false">Register Free <span>&rarr;</span></a></div>
+    <div class="hp-feat-card" data-scroll="fade-up"><div class="hp-feat-icon-box" style="background:linear-gradient(135deg,#ccfbf1,#f0fdfa);color:#0f766e"></div><h3>Smart Job Matching</h3><p>Analyzes your resume &amp; skills to suggest best-fit opportunities from our verified listings.</p><a href="jobs.html" class="hp-feat-link">Match Me <span>&rarr;</span></a></div>
+  </div>
+</section>
+
+<!-- =========== HOW IT WORKS =========== -->
+<section class="hp-how" id="how-it-works">
+  <div class="hp-how-bg"></div>
+  <div class="hp-section-head" data-scroll="fade-up">
+    <span class="hp-label-chip">HOW IT WORKS</span>
+    <h2>Get <span>Job-Ready</span> in 4 Simple Steps</h2>
+    <p>Start from zero and reach offer letter &mdash; guided every step.</p>
+  </div>
+  <div class="hp-steps">
+    <div class="hp-step" data-scroll="fade-right"><div class="hp-step-num">01</div><div class="hp-step-body"><h3>Register &amp; Create Profile</h3><p>Click <strong>Job Ready</strong> &rarr; fill quick form &rarr; get instant login credentials sent to your email.</p></div><div class="hp-step-line"></div></div>
+    <div class="hp-step" data-scroll="fade-right"><div class="hp-step-num">02</div><div class="hp-step-body"><h3>Build Your Resume</h3><p>Create a professional ATS-compliant resume with our Resume Builder. Export as PDF instantly.</p></div><div class="hp-step-line"></div></div>
+    <div class="hp-step" data-scroll="fade-right"><div class="hp-step-num">03</div><div class="hp-step-body"><h3>Analyze &amp; Improve Skills</h3><p>Discover your skill gaps for your target role and get curated resources to fill them fast.</p></div><div class="hp-step-line"></div></div>
+    <div class="hp-step" data-scroll="fade-right"><div class="hp-step-num">04</div><div class="hp-step-body"><h3>Apply &amp; Get Hired</h3><p>Browse matched entry-level jobs. Apply with your polished resume and land your first job.</p></div></div>
+  </div>
+</section>
+
+<!-- =========== ABOUT =========== -->
+<section class="hp-about" id="about">
+  <div class="hp-about-inner">
+    <div class="hp-about-visual" data-scroll="fade-right">
+      <div class="hp-about-card-main">
+        <div class="hp-about-icon-big"></div>
+        <h3>Built for Indian Students</h3>
+        <p>Specifically designed for B.Tech, BE, BCA &amp; BSc students navigating their first job search.</p>
+        <div class="hp-about-tags"><span>Freshers</span><span>Internships</span><span>0-1 yr Exp</span><span>Entry Level</span></div>
+      </div>
+      <div class="hp-about-card-mini hp-about-mini-1"><span></span><div><strong>Smart Suggestions</strong><small>AI-style skill matching</small></div></div>
+      <div class="hp-about-card-mini hp-about-mini-2"><span></span><div><strong>Secure Login</strong><small>Email-verified access</small></div></div>
+    </div>
+    <div class="hp-about-text" data-scroll="fade-left">
+      <span class="hp-label-chip">ABOUT PLATFORM</span>
+      <h2>Why <span>Job Ready</span> Exists</h2>
+      <p>Over <strong>75% of fresher resumes</strong> are rejected before a human ever reads them. Students spend months applying without knowing exactly what skills employers want.</p>
+      <p>Job Ready fixes this. One platform that shows you exactly <strong>what to build, what to learn, and where to apply.</strong></p>
+      <div class="hp-about-features">
+        <div class="hp-about-feat"><div class="hp-af-icon" style="background:#fee2e2;color:#dc2626"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div><div><strong>The Problem</strong><p>Generic resumes, unclear skill requirements, no targeted fresher job portal.</p></div></div>
+        <div class="hp-about-feat"><div class="hp-af-icon" style="background:#dcfce7;color:#15803d"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg></div><div><strong>Our Solution</strong><p>ATS Resume Builder + Skill Gap Tool + Curated Fresher Jobs + Email Alerts.</p></div></div>
+      </div>
+      <button class="jr-cta-btn" onclick="openAuthPanel('register')" style="margin-top:24px"><span> Join Job Ready Free</span><span class="jr-btn-glow"></span></button>
+    </div>
+  </div>
+</section>
+
+<!-- =========== TESTIMONIALS =========== -->
+<section class="hp-testimonials">
+  <div class="hp-section-head" data-scroll="fade-up">
+    <span class="hp-label-chip">STUDENT STORIES</span>
+    <h2>Students Who Got <span>Hired</span></h2>
+  </div>
+  <div class="hp-testi-track">
+    <div class="hp-testi-inner" id="testiTrack">
+      <div class="hp-testi-card"><div class="hp-testi-stars"></div><p>"I built my resume in 20 minutes and got a call from TCS within a week. The ATS tips were a game changer!"</p><div class="hp-testi-author"><div class="hp-testi-avatar" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)">R</div><div><strong>Rahul M.</strong><small>Frontend Dev &middot; Hired at TCS</small></div></div></div>
+      <div class="hp-testi-card"><div class="hp-testi-stars"></div><p>"Skill gap analysis showed me I was missing SQL and Docker. Learned them in 2 weeks and cracked my interview!"</p><div class="hp-testi-author"><div class="hp-testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">P</div><div><strong>Priya S.</strong><small>Data Analyst &middot; Hired at Infosys</small></div></div></div>
+      <div class="hp-testi-card"><div class="hp-testi-stars"></div><p>"Job Ready's roadmap guided me from basics to getting placed. Best platform for college students!"</p><div class="hp-testi-author"><div class="hp-testi-avatar" style="background:linear-gradient(135deg,#10b981,#0284c7)">A</div><div><strong>Akash K.</strong><small>Full Stack Dev &middot; Startup Hire</small></div></div></div>
+      <div class="hp-testi-card"><div class="hp-testi-stars"></div><p>"The email system is brilliant. Got my password instantly and the admin confirmation gave me trust."</p><div class="hp-testi-author"><div class="hp-testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">N</div><div><strong>Neha T.</strong><small>UI/UX Designer &middot; Hired at Wipro</small></div></div></div>
+      <div class="hp-testi-card"><div class="hp-testi-stars"></div><p>"Found 3 relevant internships in the first day. All matched my skill set perfectly!"</p><div class="hp-testi-author"><div class="hp-testi-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">S</div><div><strong>Siddharth P.</strong><small>Backend Dev &middot; Hired at HCL</small></div></div></div>
+    </div>
+  </div>
+  <div class="hp-testi-dots" id="testiDots"></div>
+</section>
+
+<!-- =========== CTA BANNER =========== -->
+<section class="hp-cta-banner" data-scroll="fade-up">
+  <div class="hp-cta-orb-1"></div><div class="hp-cta-orb-2"></div>
+  <div class="hp-cta-content">
+    <h2>Ready to Become <span>Job-Ready?</span></h2>
+    <p>Join 2,400+ students already building their careers. Free forever.</p>
+    <div class="hp-cta-btns" id="ctaBtnsGuest">
+      <button class="hp-cta-main-btn" onclick="openAuthPanel('register')"> Start Free &mdash; Get Job Ready</button>
+      <button class="hp-cta-outline-btn" onclick="openAuthPanel('login')"> Login to Account</button>
+    </div>
+    <div class="hp-cta-btns hidden" id="ctaBtnsUser">
+      <a href="dashboard.html" class="hp-cta-main-btn"> Open My Dashboard</a>
+      <a href="jobs.html" class="hp-cta-outline-btn"> Browse Jobs</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========== CONTACT =========== -->
+<section class="contact-section" id="contact">
+  <div class="contact-wrapper">
+    <div class="section-heading" style="text-align:center" data-scroll="fade-up">
+      <span class="section-label">GET IN TOUCH</span>
+      <h2 style="font-size:34px;font-weight:800;color:#0f172a;margin:10px 0">Have Questions? <span>Contact Us</span></h2>
+      <p style="max-width:600px;margin:0 auto;color:#64748b;font-size:15px">We help students with resume building, skill tests, and job applications.</p>
+    </div>
+    <div class="contact-layout-grid">
+      <div class="contact-cards-container">
+        <a href="https://wa.me/919975124732?text=Hello%20JobReady%20Team!" target="_blank" class="contact-info-card whatsapp-direct"><div class="contact-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div><div class="contact-card-text"><small>WhatsApp Support</small><strong>+91 9975124732</strong><span> Online  Instant Reply</span></div></a>
+        <a href="mailto:komalkhatake50@gmail.com" class="contact-info-card email-direct"><div class="contact-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div class="contact-card-text"><small>Official Admin Email</small><strong>komalkhatake50@gmail.com</strong><span style="color:#0284c7">Quick Response within 24 hrs</span></div></a>
+        <a href="tel:+919975124732" class="contact-info-card phone-direct"><div class="contact-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div><div class="contact-card-text"><small>Direct Helpline</small><strong>+91 9975124732</strong><span style="color:#7e22ce">Mon - Sat: 9AM - 8PM</span></div></a>
+      </div>
+      <div class="contact-form-box" data-scroll="fade-left" style="text-align: center;">
+        <h3>Send a Quick Message</h3>
+        <p>Have a suggestion or partnership query? Leave your details below.</p>
+        <form action="https://formsubmit.co/komalkhatake50@gmail.com" method="POST" style="text-align: left;">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="New Inquiry from JobReady Contact Form">
+          
+          <div class="jobready-form-group"><label>Your Name *</label><div class="jobready-input-wrap"><span class="input-icon"></span><input type="text" name="Name" id="contactInquiryName" placeholder="Enter your full name" required></div></div>
+          <div class="jobready-form-group"><label>Email Address *</label><div class="jobready-input-wrap"><span class="input-icon"></span><input type="email" name="Email" id="contactInquiryEmail" placeholder="Enter your email" required></div></div>
+          <div class="jobready-form-group"><label>Message *</label><div class="jobready-input-wrap"><span class="input-icon"></span><input type="text" name="Message" id="contactInquiryMessage" placeholder="How can we help you?" required></div></div>
+          
+          <div style="text-align: center;">
+            <button type="submit" class="jobready-glow-btn quick-contact-btn" style="width: auto; padding: 12px 30px; margin-top: 10px;">
+              <span class="btn-icon"></span><span>Send Inquiry</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== FOOTER =========== -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <a href="index.html" class="jr-logo"><div class="jr-orbit-logo">
+      <div class="jr-orbit-ring red-ring"></div>
+      <div class="jr-orbit-ring blue-ring"></div>
+      <div class="jr-orbit-text">JR</div>
+    </div><div class="jr-logo-text"><span class="jr-logo-name">Job<span>Ready</span></span><span class="jr-logo-tag">Student to Hired</span></div></a>
+      <p style="margin-top:10px;color:#64748b;font-size:14px">From Student to Job-Ready. Career growth made accessible.</p>
+    </div>
+    <div class="footer-links"><a href="index.html">Home</a><a href="#about">About</a><a href="resume.html">Resume</a><a href="jobs.html">Jobs</a><a href="skills.html">Skills</a><a href="Roadmap.html">Roadmap</a><a href="#contact">Contact Us</a>
+        </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 JobReady. All rights reserved. 
+     
+    <span>komalkhatake50@gmail.com</span>
+  </div>
+</footer>
+
+<div class="floating-whatsapp-widget" id="jobreadyWhatsappWidget">
+  <a href="https://wa.me/919975124732?text=Hello%20JobReady%20Team!" target="_blank" class="floating-whatsapp-btn" title="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  </a>
+  <a href="https://wa.me/919975124732" target="_blank" class="whatsapp-chip"><span class="whatsapp-chip-title">WhatsApp Support</span><span class="whatsapp-chip-num">9975124732</span></a>
+</div>
+
+<script src="script.js"></script>
+<script src="jobready-auth.js"></script>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/919975124732" class="floating-wa" target="_blank" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 434.4c-33.1 0-65.5-8.9-94-25.7l-6.7-4-69.8 18.3L72 354.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 185.3zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+    </svg>
+</a>
+</body>
+</html>

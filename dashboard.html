@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobReady | Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <nav>
+
+            <a href="index.html" class="jobready-brand-logo">
+                <div class="jobready-logo-emblem">JR</div>
+                <div class="jobready-logo-text">
+                    <span class="jobready-logo-title">Job<span class="text-ready">Ready</span></span>
+                    <span class="jobready-logo-tagline">Student to Hired</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="jobs.html">Jobs</a></li>
+                <li>
+                    <a href="#" onclick="logoutUser()">Logout</a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- Dashboard -->
+    <main class="dashboard-page">
+
+        <div class="dashboard-heading">
+
+            <h1 id="welcomeMessage">
+                Welcome to JobReady!
+            </h1>
+
+            <p>
+                Your journey from student to job-ready starts here.
+            </p>
+
+        </div>
+
+
+        <!-- Dashboard Cards -->
+        <div class="dashboard-grid">
+
+            <!-- Resume -->
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    📄
+                </div>
+
+                <h2>Resume Builder</h2>
+
+                <p>
+                    Create a professional resume and download it as PDF.
+                </p>
+
+                <a href="resume.html" class="primary-btn">
+                    Build Resume
+                </a>
+
+            </div>
+
+
+            <!-- Skills -->
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    📊
+                </div>
+
+                <h2>Skill Analysis</h2>
+
+                <p>
+                    Analyze your skills and find the skills you need to improve.
+                </p>
+
+                <a href="skills.html" class="primary-btn">
+                    Analyze Skills
+                </a>
+
+            </div>
+
+
+            <!-- Jobs -->
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    💼
+                </div>
+
+                <h2>Recommended Jobs</h2>
+
+                <p>
+                    Explore job roles that match your skills and interests.
+                </p>
+
+                <a href="jobs.html" class="primary-btn">
+                    Find Jobs
+                </a>
+
+            </div>
+
+
+            <!-- Learning -->
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    📚
+                </div>
+
+                <h2>Learning Roadmap</h2>
+
+                <p>
+                    Discover what skills you should learn next.
+                </p>
+
+                <a href="skills.html" class="primary-btn">
+                    Start Learning
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <h3>JobReady</h3>
+
+        <p>
+            From Student to Job-Ready.
+        </p>
+
+        <p>
+            © 2026 JobReady. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        // Get logged-in user
+        let savedUser =
+            localStorage.getItem("jobreadyUser");
+
+        let loggedIn =
+            localStorage.getItem("jobreadyLoggedIn");
+
+
+        // Check login
+        if (
+            savedUser === null ||
+            loggedIn !== "true"
+        ) {
+
+            window.location.href = "login.html";
+
+        } else {
+
+            let user =
+                JSON.parse(savedUser);
+
+            document.getElementById("welcomeMessage").innerText =
+                "Welcome, " + user.name + "!";
+
+        }
+
+
+        // Logout
+        function logoutUser() {
+
+            localStorage.removeItem(
+                "jobreadyLoggedIn"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

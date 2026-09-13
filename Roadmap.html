@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Roadmap - JobReady</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">JobReady</div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="jobs.html">Jobs</a></li>
+        </ul>
+
+        <div class="nav-buttons">
+            <a href="login.html" class="login">Login</a>
+            <a href="register.html" class="signup">Get Started</a>
+        </div>
+    </nav>
+</header>
+
+
+<main class="roadmap-page">
+
+    <section class="roadmap-heading">
+
+        <h1>Your Learning <span>Roadmap</span></h1>
+
+        <p>
+            Follow a personalized learning path based on your selected skills
+            and career goal.
+        </p>
+
+    </section>
+
+
+    <section class="roadmap-container" id="roadmapContainer">
+        <!-- Roadmaps will appear here -->
+    </section>
+
+</main>
+
+
+<footer>
+    <h3>JobReady</h3>
+    <p>From Student to Job-Ready.</p>
+</footer>
+
+
+<script>
+
+/* =========================================
+   GET SELECTED SKILLS
+========================================= */
+
+const skills = JSON.parse(
+    localStorage.getItem("jobreadyskills") || "[]"
+);
+
+const roadmapContainer =
+    document.getElementById("roadmapContainer");
+
+
+/* =========================================
+   ROADMAP DATA
+========================================= */
+
+const roadmapData = {
+
+    "HTML": {
+        title: "HTML",
+        icon: "🌐",
+        complexity: 2,
+        steps: [
+            "Learn HTML structure",
+            "Learn headings, paragraphs and links",
+            "Learn images and lists",
+            "Learn tables",
+            "Learn forms and input fields",
+            "Learn semantic HTML",
+            "Learn accessibility basics",
+            "Create multiple web pages",
+            "Build a personal portfolio page"
+        ]
+    },
+
+
+    "CSS": {
+        title: "CSS",
+        icon: "🎨",
+        complexity: 3,
+        steps: [
+            "Learn CSS selectors",
+            "Learn colors and typography",
+            "Understand the CSS box model",
+            "Learn margins and padding",
+            "Learn Flexbox",
+            "Learn CSS Grid",
+            "Learn positioning",
+            "Learn responsive design",
+            "Build responsive websites"
+        ]
+    },
+
+
+    "JavaScript": {
+        title: "JavaScript",
+        icon: "⚡",
+        complexity: 4,
+        steps: [
+            "Learn variables and data types",
+            "Learn operators and conditions",
+            "Learn loops",
+            "Learn functions",
+            "Learn arrays and objects",
+            "Learn DOM manipulation",
+            "Learn events",
+            "Learn Local Storage",
+            "Learn Fetch API and JSON",
+            "Build interactive web projects"
+        ]
+    },
+
+
+    "C": {
+        title: "C Programming",
+        icon: "💻",
+        complexity: 3,
+        steps: [
+            "Learn variables and data types",
+            "Learn operators",
+            "Practice conditions",
+            "Practice loops",
+            "Learn functions",
+            "Learn arrays",
+            "Learn strings",
+            "Learn pointers",
+            "Practice programming problems",
+            "Build small C projects"
+        ]
+    },
+
+
+    "C++": {
+        title: "C++",
+        icon: "💻",
+        complexity: 4,
+        steps: [
+            "Learn C++ fundamentals",
+            "Practice conditions and loops",
+            "Learn functions",
+            "Learn arrays and strings",
+            "Learn pointers and references",
+            "Learn classes and objects",
+            "Learn inheritance",
+            "Learn polymorphism",
+            "Learn STL",
+            "Start Data Structures and Algorithms"
+        ]
+    },
+
+
+    "Python": {
+        title: "Python",
+        icon: "🐍",
+        complexity: 3,
+        steps: [
+            "Learn Python syntax",
+            "Learn variables and data types",
+            "Practice conditions and loops",
+            "Learn functions",
+            "Learn lists, tuples and dictionaries",
+            "Learn file handling",
+            "Learn exception handling",
+            "Learn OOP basics",
+            "Practice Python problems",
+            "Build Python projects"
+        ]
+    },
+
+
+    "SQL": {
+        title: "SQL",
+        icon: "🗄️",
+        complexity: 3,
+        steps: [
+            "Understand databases",
+            "Learn tables and relationships",
+            "Practice SELECT queries",
+            "Learn WHERE and ORDER BY",
+            "Learn INSERT, UPDATE and DELETE",
+            "Learn aggregate functions",
+            "Learn GROUP BY and HAVING",
+            "Learn JOIN",
+            "Learn subqueries",
+            "Build a database project"
+        ]
+    },
+
+
+    "Git": {
+        title: "Git & GitHub",
+        icon: "🔧",
+        complexity: 3,
+        steps: [
+            "Understand Git and version control",
+            "Install Git and configure your account",
+            "Learn repositories and commits",
+            "Practice git init",
+            "Practice git add, commit and status",
+            "Learn branches",
+            "Learn merge",
+            "Create a GitHub repository",
+            "Learn git push, pull and clone",
+            "Practice pull requests",
+            "Upload your projects to GitHub",
+            "Create a good project README"
+        ]
+    },
+
+
+    "Linux": {
+        title: "Linux",
+        icon: "🐧",
+        complexity: 4,
+        steps: [
+            "Understand Linux operating systems",
+            "Learn terminal basics",
+            "Learn files and directories",
+            "Learn basic Linux commands",
+            "Learn file permissions",
+            "Learn users and groups",
+            "Learn process management",
+            "Learn package management",
+            "Learn basic networking commands",
+            "Practice Linux projects"
+        ]
+    },
+
+
+    "Networking": {
+        title: "Networking",
+        icon: "🌐",
+        complexity: 4,
+        steps: [
+            "Understand computer networks",
+            "Learn LAN, WAN and MAN",
+            "Learn the OSI model",
+            "Learn TCP/IP model",
+            "Understand IP addresses",
+            "Learn DNS",
+            "Learn DHCP",
+            "Learn HTTP and HTTPS",
+            "Understand routers and switches",
+            "Practice networking concepts"
+        ]
+    },
+
+
+    "Java": {
+        title: "Java",
+        icon: "☕",
+        complexity: 4,
+        steps: [
+            "Learn Java syntax",
+            "Learn variables and data types",
+            "Practice conditions and loops",
+            "Learn methods",
+            "Learn arrays and strings",
+            "Learn classes and objects",
+            "Learn inheritance",
+            "Learn polymorphism",
+            "Learn collections",
+            "Build a Java project"
+        ]
+    },
+
+
+    "Excel": {
+        title: "Excel",
+        icon: "📊",
+        complexity: 2,
+        steps: [
+            "Learn Excel interface",
+            "Enter and format data",
+            "Learn basic formulas",
+            "Learn important functions",
+            "Learn sorting and filtering",
+            "Learn charts",
+            "Learn conditional formatting",
+            "Learn Pivot Tables",
+            "Practice data analysis",
+            "Create an Excel dashboard"
+        ]
+    },
+
+
+    "Statistics": {
+        title: "Statistics",
+        icon: "📈",
+        complexity: 4,
+        steps: [
+            "Learn mean, median and mode",
+            "Learn range and variance",
+            "Learn standard deviation",
+            "Understand probability",
+            "Learn distributions",
+            "Learn correlation",
+            "Learn regression basics",
+            "Practice data interpretation",
+            "Analyze real datasets",
+            "Apply statistics to projects"
+        ]
+    },
+
+
+    "Figma": {
+        title: "Figma",
+        icon: "🎨",
+        complexity: 2,
+        steps: [
+            "Learn the Figma interface",
+            "Learn frames and shapes",
+            "Learn colors and typography",
+            "Learn components",
+            "Learn auto layout",
+            "Learn grids",
+            "Create wireframes",
+            "Create UI designs",
+            "Create prototypes",
+            "Design a complete application"
+        ]
+    },
+
+
+    "UI Design": {
+        title: "UI Design",
+        icon: "🖌️",
+        complexity: 3,
+        steps: [
+            "Understand UI design principles",
+            "Learn layout and spacing",
+            "Learn typography",
+            "Learn color theory",
+            "Learn visual hierarchy",
+            "Design buttons and forms",
+            "Create wireframes",
+            "Create high-fidelity designs",
+            "Design responsive interfaces",
+            "Build a complete UI project"
+        ]
+    },
+
+
+    "UX Design": {
+        title: "UX Design",
+        icon: "🧩",
+        complexity: 4,
+        steps: [
+            "Understand UX principles",
+            "Learn user research",
+            "Identify user problems",
+            "Create user personas",
+            "Create user journeys",
+            "Learn information architecture",
+            "Create wireframes",
+            "Create prototypes",
+            "Conduct usability testing",
+            "Improve designs using feedback"
+        ]
+    },
+
+
+    "Cloud": {
+        title: "Cloud Computing",
+        icon: "☁️",
+        complexity: 5,
+        steps: [
+            "Understand cloud computing",
+            "Learn IaaS, PaaS and SaaS",
+            "Understand virtualization",
+            "Learn cloud storage",
+            "Learn cloud networking",
+            "Learn cloud security basics",
+            "Choose AWS, Azure or Google Cloud",
+            "Learn cloud databases",
+            "Deploy a simple application",
+            "Build a cloud project"
+        ]
+    },
+
+
+    "Docker": {
+        title: "Docker",
+        icon: "🐳",
+        complexity: 4,
+        steps: [
+            "Understand containers",
+            "Install Docker",
+            "Learn Docker images",
+            "Learn Docker containers",
+            "Practice Docker commands",
+            "Create a Dockerfile",
+            "Build Docker images",
+            "Learn Docker Compose",
+            "Containerize a web application",
+            "Build and deploy a Docker project"
+        ]
+    }
+
+};
+
+
+/* =========================================
+   DISPLAY ROADMAPS
+========================================= */
+
+if (skills.length === 0) {
+
+    roadmapContainer.innerHTML = `
+        <div class="roadmap-empty">
+
+            <h2>Start Your Roadmap 🚀</h2>
+
+            <p>
+                First select your skills on the Skill Analysis page.
+            </p>
+
+            <a href="skills.html" class="primary-btn">
+                Analyze My Skills
+            </a>
+
+        </div>
+    `;
+
+} else {
+
+    let html = "";
+
+    /*
+       Show ALL available roadmaps
+    */
+
+    Object.keys(roadmapData).forEach((skill, index) => {
+
+        const data = roadmapData[skill];
+
+        html += `
+
+            <div class="roadmap-card">
+
+                <div class="roadmap-number">
+                    ${index + 1}
+                </div>
+
+
+                <div class="roadmap-content">
+
+                    <h2>
+                        ${data.icon} ${data.title}
+                    </h2>
+
+                    <p>
+                        Learning path for ${data.title}
+                    </p>
+
+
+                    <div class="complexity">
+                        <strong>Complexity:</strong>
+
+                        <span>
+                            ${data.complexity}/5
+                        </span>
+                    </div>
+
+
+                    <div class="roadmap-progress">
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill"
+                                id="progress-${index}">
+                            </div>
+
+                        </div>
+
+                        <span id="progress-text-${index}">
+                            0% Complete
+                        </span>
+
+                    </div>
+
+
+                    <ul class="roadmap-steps">
+
+                        ${data.steps.map((step, stepIndex) => `
+
+                            <li>
+
+                                <label>
+
+                                    <input
+                                        type="checkbox"
+                                        class="roadmap-check"
+                                        data-skill="${skill}"
+                                        data-step="${stepIndex}"
+                                        onchange="updateProgress('${skill}', ${index})"
+                                    >
+
+                                    <span>
+                                        ${step}
+                                    </span>
+
+                                </label>
+
+                            </li>
+
+                        `).join("")}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    roadmapContainer.innerHTML = html;
+
+
+    /*
+       Load saved progress
+    */
+
+    loadProgress();
+
+}
+
+
+/* =========================================
+   UPDATE PROGRESS
+========================================= */
+
+function updateProgress(skill, cardIndex) {
+
+    const checkboxes = document.querySelectorAll(
+        `.roadmap-check[data-skill="${skill}"]`
+    );
+
+
+    let completed = 0;
+
+
+    checkboxes.forEach((checkbox, index) => {
+
+        if (checkbox.checked) {
+            completed++;
+        }
+
+
+        localStorage.setItem(
+            `roadmap-${skill}-${index}`,
+            checkbox.checked
+        );
+
+    });
+
+
+    const total = checkboxes.length;
+
+
+    const percentage = total === 0
+        ? 0
+        : Math.round((completed / total) * 100);
+
+
+    const progress =
+        document.getElementById(`progress-${cardIndex}`);
+
+
+    const progressText =
+        document.getElementById(`progress-text-${cardIndex}`);
+
+
+    if (progress) {
+        progress.style.width = percentage + "%";
+    }
+
+
+    if (progressText) {
+        progressText.textContent =
+            percentage + "% Complete";
+    }
+
+}
+
+
+/* =========================================
+   LOAD SAVED PROGRESS
+========================================= */
+
+function loadProgress() {
+
+    document.querySelectorAll(".roadmap-check")
+        .forEach(checkbox => {
+
+            const skill = checkbox.dataset.skill;
+            const step = checkbox.dataset.step;
+
+
+            const saved = localStorage.getItem(
+                `roadmap-${skill}-${step}`
+            );
+
+
+            checkbox.checked = saved === "true";
+
+        });
+
+
+    Object.keys(roadmapData).forEach((skill, index) => {
+
+        const checkbox =
+            document.querySelector(
+                `.roadmap-check[data-skill="${skill}"]`
+            );
+
+
+        if (checkbox) {
+
+            updateProgress(skill, index);
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

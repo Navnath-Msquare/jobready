@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobReady | Jobs</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <header>
+        <nav>
+
+            <div class="logo">
+                JobReady
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="resume.html">Resume Builder</a>
+                </li>
+
+                <li>
+                    <a href="skills.html">Skills</a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">Jobs</a>
+                </li>
+
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="jobs-page">
+
+        <div class="jobs-heading">
+
+            <h1>💼 Recommended Jobs</h1>
+
+            <p>
+                Find jobs that match your skills and career goals.
+            </p>
+
+        </div>
+
+
+        <!-- ================= RECOMMENDED JOBS ================= -->
+
+        <section class="recommendation-section">
+
+            <h2>⭐ Recommended For You</h2>
+
+            <p id="recommendationMessage">
+                Select your skills first to get personalized recommendations.
+            </p>
+
+            <div
+                class="job-container"
+                id="recommendedJobs">
+            </div>
+
+        </section>
+
+
+        <!-- ================= SEARCH ================= -->
+
+        <div class="job-search">
+
+            <input
+                type="text"
+                id="jobSearch"
+                placeholder="Search job or skill..."
+            >
+
+            <button onclick="searchJobs()">
+                Search
+            </button>
+
+        </div>
+
+
+        <!-- ================= ALL JOBS ================= -->
+
+        <h2 class="all-jobs-title">
+            All Job Opportunities
+        </h2>
+
+        <div
+            class="job-container"
+            id="jobContainer">
+
+            <!-- Frontend Developer -->
+            <div class="job-card">
+
+                <h2>Frontend Developer</h2>
+
+                <p>
+                    Build websites and user interfaces.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    HTML, CSS, JavaScript, Git
+                </p>
+
+                <button onclick="showJob('Frontend Developer')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+
+            <!-- Backend Developer -->
+            <div class="job-card">
+
+                <h2>Backend Developer</h2>
+
+                <p>
+                    Build server-side applications and APIs.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    Python, SQL, Git, Linux
+                </p>
+
+                <button onclick="showJob('Backend Developer')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+
+            <!-- Full Stack Developer -->
+            <div class="job-card">
+
+                <h2>Full Stack Developer</h2>
+
+                <p>
+                    Work on both frontend and backend development.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    HTML, CSS, JavaScript, Python, SQL, Git
+                </p>
+
+                <button onclick="showJob('Full Stack Developer')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+
+            <!-- Software Developer -->
+            <div class="job-card">
+
+                <h2>Software Developer</h2>
+
+                <p>
+                    Develop software applications and solutions.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    C++, Python, SQL, Git
+                </p>
+
+                <button onclick="showJob('Software Developer')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+
+            <!-- Java Developer -->
+            <div class="job-card">
+
+                <h2>Java Developer</h2>
+
+                <p>
+                    Develop applications using Java.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    Java, SQL, Git
+                </p>
+
+                <button onclick="showJob('Java Developer')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+
+            <!-- Data Analyst -->
+            <div class="job-card">
+
+                <h2>Data Analyst</h2>
+
+                <p>
+                    Analyze data and create useful insights.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    Python, SQL, Excel, Statistics
+                </p>
+
+                <button onclick="showJob('Data Analyst')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+
+            <!-- Data Scientist -->
+            <div class="job-card">
+
+                <h2>Data Scientist</h2>
+
+                <p>
+                    Use programming and statistics to work with data.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    Python, SQL, Statistics
+                </p>
+
+                <button onclick="showJob('Data Scientist')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+
+            <!-- Cybersecurity Analyst -->
+            <div class="job-card">
+
+                <h2>Cybersecurity Analyst</h2>
+
+                <p>
+                    Help protect systems, applications and networks.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    Linux, Networking, Python, Git
+                </p>
+
+                <button onclick="showJob('Cybersecurity Analyst')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+
+            <!-- Cloud Engineer -->
+            <div class="job-card">
+
+                <h2>Cloud Engineer</h2>
+
+                <p>
+                    Work with cloud infrastructure and services.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    Linux, Networking, Cloud, Git
+                </p>
+
+                <button onclick="showJob('Cloud Engineer')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+
+            <!-- DevOps Engineer -->
+            <div class="job-card">
+
+                <h2>DevOps Engineer</h2>
+
+                <p>
+                    Help automate development and deployment.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    Linux, Git, Docker, Cloud
+                </p>
+
+                <button onclick="showJob('DevOps Engineer')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+
+            <!-- UI/UX Designer -->
+            <div class="job-card">
+
+                <h2>UI/UX Designer</h2>
+
+                <p>
+                    Design useful and user-friendly digital experiences.
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    Figma, UI Design, UX Design
+                </p>
+
+                <button onclick="showJob('UI/UX Designer')">
+                    💼 View Job
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h3>JobReady</h3>
+
+        <p>
+            From Student to Job-Ready.
+        </p>
+
+        <p>
+            © 2026 JobReady. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* =========================================
+           JOB DATA
+        ========================================= */
+
+        const jobs = [
+
+            {
+                name: "Frontend Developer",
+                skills: ["HTML", "CSS", "JavaScript", "Git"]
+            },
+
+            {
+                name: "Backend Developer",
+                skills: ["Python", "SQL", "Git", "Linux"]
+            },
+
+            {
+                name: "Full Stack Developer",
+                skills: [
+                    "HTML",
+                    "CSS",
+                    "JavaScript",
+                    "Python",
+                    "SQL",
+                    "Git"
+                ]
+            },
+
+            {
+                name: "Software Developer",
+                skills: [
+                    "C++",
+                    "Python",
+                    "SQL",
+                    "Git"
+                ]
+            },
+
+            {
+                name: "Java Developer",
+                skills: [
+                    "Java",
+                    "SQL",
+                    "Git"
+                ]
+            },
+
+            {
+                name: "Data Analyst",
+                skills: [
+                    "Python",
+                    "SQL",
+                    "Excel",
+                    "Statistics"
+                ]
+            },
+
+            {
+                name: "Data Scientist",
+                skills: [
+                    "Python",
+                    "SQL",
+                    "Statistics"
+                ]
+            },
+
+            {
+                name: "Cybersecurity Analyst",
+                skills: [
+                    "Linux",
+                    "Networking",
+                    "Python",
+                    "Git"
+                ]
+            },
+
+            {
+                name: "Cloud Engineer",
+                skills: [
+                    "Linux",
+                    "Networking",
+                    "Cloud",
+                    "Git"
+                ]
+            },
+
+            {
+                name: "DevOps Engineer",
+                skills: [
+                    "Linux",
+                    "Git",
+                    "Docker",
+                    "Cloud"
+                ]
+            },
+
+            {
+                name: "UI/UX Designer",
+                skills: [
+                    "Figma",
+                    "UI Design",
+                    "UX Design"
+                ]
+            }
+
+        ];
+
+
+        /* =========================================
+           OPEN JOB DETAILS
+        ========================================= */
+
+        function showJob(jobName) {
+
+            window.location.href =
+                "job-details.html?job=" +
+                encodeURIComponent(jobName);
+
+        }
+
+
+        /* =========================================
+           RECOMMEND JOBS
+        ========================================= */
+
+        function recommendJobs() {
+
+            const savedSkills =
+                localStorage.getItem("jobreadyskills");
+
+            const area =
+                document.getElementById("recommendedJobs");
+
+            const message =
+                document.getElementById("recommendationMessage");
+
+
+            area.innerHTML = "";
+
+
+            if (savedSkills === null) {
+
+                message.innerText =
+                    "Go to Skill Analysis and select your skills first.";
+
+                return;
+
+            }
+
+
+            let studentSkills;
+
+            try {
+
+                studentSkills =
+                    JSON.parse(savedSkills);
+
+            } catch (error) {
+
+                message.innerText =
+                    "Unable to read your saved skills.";
+
+                return;
+
+            }
+
+
+            if (!Array.isArray(studentSkills) ||
+                studentSkills.length === 0) {
+
+                message.innerText =
+                    "Select your skills first to get personalized recommendations.";
+
+                return;
+
+            }
+
+
+            let results = [];
+
+
+            /* Calculate job matches */
+
+            jobs.forEach(function(job) {
+
+                let matched = 0;
+
+
+                job.skills.forEach(function(skill) {
+
+                    if (studentSkills.includes(skill)) {
+
+                        matched++;
+
+                    }
+
+                });
+
+
+                const percentage =
+                    Math.round(
+                        (matched / job.skills.length) * 100
+                    );
+
+
+                if (percentage > 0) {
+
+                    results.push({
+
+                        name: job.name,
+
+                        skills: job.skills,
+
+                        percentage: percentage,
+
+                        matched: matched
+
+                    });
+
+                }
+
+            });
+
+
+            /* Highest match first */
+
+            results.sort(function(a, b) {
+
+                return b.percentage -
+                    a.percentage;
+
+            });
+
+
+            /* Top 3 */
+
+            const topResults =
+                results.slice(0, 3);
+
+
+            if (topResults.length === 0) {
+
+                message.innerText =
+                    "No matching jobs found yet.";
+
+                return;
+
+            }
+
+
+            message.innerText =
+                "Based on your skills, these jobs may suit you:";
+
+
+            /* Display recommendations */
+
+            topResults.forEach(function(job) {
+
+                let missing = [];
+
+
+                job.skills.forEach(function(skill) {
+
+                    if (!studentSkills.includes(skill)) {
+
+                        missing.push(skill);
+
+                    }
+
+                });
+
+
+                area.innerHTML +=
+
+                    "<div class='job-card'>" +
+
+                    "<h2>⭐ " +
+                    job.name +
+                    "</h2>" +
+
+                    "<p>" +
+                    "<strong>Skill Match:</strong> " +
+                    job.percentage +
+                    "%" +
+                    "</p>" +
+
+                    "<p>" +
+                    "<strong>Required Skills:</strong> " +
+                    job.skills.join(", ") +
+                    "</p>" +
+
+                    "<p>" +
+                    "<strong>Skills to Learn:</strong> " +
+                    (
+                        missing.length > 0
+                            ? missing.join(", ")
+                            : "You have all required skills!"
+                    ) +
+                    "</p>" +
+
+                    "<button onclick=\"window.location.href='Roadmap.html'\">" +
+                    "📚 View Learning Roadmap" +
+                    "</button>" +
+
+                    "<button onclick=\"showJob('" +
+                    job.name +
+                    "')\">" +
+                    "💼 View Job" +
+                    "</button>" +
+
+                    "</div>";
+
+            });
+
+        }
+
+
+        /* =========================================
+           SEARCH JOBS
+        ========================================= */
+
+        function searchJobs() {
+
+            const search =
+                document.getElementById(
+                    "jobSearch"
+                ).value.toLowerCase().trim();
+
+
+            const cards =
+                document.querySelectorAll(
+                    "#jobContainer .job-card"
+                );
+
+
+            cards.forEach(function(card) {
+
+                const text =
+                    card.innerText.toLowerCase();
+
+
+                if (text.includes(search)) {
+
+                    card.style.display =
+                        "block";
+
+                } else {
+
+                    card.style.display =
+                        "none";
+
+                }
+
+            });
+
+        }
+
+
+        /* =========================================
+           ENTER KEY SEARCH
+        ========================================= */
+
+        document.getElementById("jobSearch")
+            .addEventListener("keyup", function(event) {
+
+                if (event.key === "Enter") {
+
+                    searchJobs();
+
+                }
+
+            });
+
+
+        /* =========================================
+           START
+        ========================================= */
+
+        recommendJobs();
+
+    </script>
+
+</body>
+
+</html>

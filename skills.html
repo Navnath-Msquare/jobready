@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobReady | Skill Analysis</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ===============================
+         NAVIGATION
+    ================================ -->
+
+    <header>
+        <nav>
+
+            <div class="logo">JobReady</div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="resume.html">Resume Builder</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="jobs.html">Jobs</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- ===============================
+         MAIN
+    ================================ -->
+
+    <main class="skill-page">
+
+        <div class="skill-heading">
+
+            <h1>📊 Skill Analysis</h1>
+
+            <p>
+                Select the skills you already know and choose
+                a job role you are interested in.
+            </p>
+
+        </div>
+
+
+        <!-- ===============================
+             SKILL FORM
+        ================================ -->
+
+        <div class="skill-form">
+
+            <h2>🛠️ Select Your Skills</h2>
+
+            <div class="skill-options">
+
+                <label>
+                    <input type="checkbox" value="C">
+                    C
+                </label>
+
+                <label>
+                    <input type="checkbox" value="C++">
+                    C++
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Python">
+                    Python
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Java">
+                    Java
+                </label>
+
+                <label>
+                    <input type="checkbox" value="HTML">
+                    HTML
+                </label>
+
+                <label>
+                    <input type="checkbox" value="CSS">
+                    CSS
+                </label>
+
+                <label>
+                    <input type="checkbox" value="JavaScript">
+                    JavaScript
+                </label>
+
+                <label>
+                    <input type="checkbox" value="SQL">
+                    SQL
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Git">
+                    Git
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Linux">
+                    Linux
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Networking">
+                    Networking
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Excel">
+                    Excel
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Statistics">
+                    Statistics
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Figma">
+                    Figma
+                </label>
+
+                <label>
+                    <input type="checkbox" value="UI Design">
+                    UI Design
+                </label>
+
+                <label>
+                    <input type="checkbox" value="UX Design">
+                    UX Design
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Cloud">
+                    Cloud
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Docker">
+                    Docker
+                </label>
+
+            </div>
+
+
+            <!-- ===============================
+                 TARGET JOB
+            ================================ -->
+
+            <h2>🎯 Choose Your Target Job</h2>
+
+            <select id="targetJob">
+
+                <option value="">
+                    Select a job
+                </option>
+
+                <option value="frontend">
+                    Frontend Developer
+                </option>
+
+                <option value="backend">
+                    Backend Developer
+                </option>
+
+                <option value="fullstack">
+                    Full Stack Developer
+                </option>
+
+                <option value="software">
+                    Software Developer
+                </option>
+
+                <option value="java">
+                    Java Developer
+                </option>
+
+                <option value="dataanalyst">
+                    Data Analyst
+                </option>
+
+                <option value="datascientist">
+                    Data Scientist
+                </option>
+
+                <option value="cyber">
+                    Cybersecurity Analyst
+                </option>
+
+                <option value="cloud">
+                    Cloud Engineer
+                </option>
+
+                <option value="devops">
+                    DevOps Engineer
+                </option>
+
+                <option value="uiux">
+                    UI/UX Designer
+                </option>
+
+            </select>
+
+
+            <button
+                class="primary-btn"
+                onclick="analyzeMySkills()">
+
+                Analyze My Skills
+
+            </button>
+
+        </div>
+
+
+        <!-- ===============================
+             RESULTS
+        ================================ -->
+
+        <section class="skill-result">
+
+            <h2>🎯 Your Results</h2>
+
+            <div id="resultContent">
+
+                <div class="result-box">
+
+                    <p>
+                        Select your skills and target job
+                        to see your skill match.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ===============================
+                 AUTOMATIC JOB RECOMMENDATIONS
+            ================================ -->
+
+            <div id="jobRecommendations"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ===============================
+         FOOTER
+    ================================ -->
+
+    <footer>
+
+        <h3>JobReady</h3>
+
+        <p>
+            From Student to Job-Ready.
+        </p>
+
+        <p>
+            © 2026 JobReady. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ===============================
+         JAVASCRIPT
+    ================================ -->
+
+    <script>
+
+        // ==========================================
+        // JOB DATABASE
+        // ==========================================
+
+        const jobs = [
+
+            {
+                title: "Frontend Developer",
+                type: "Web Development",
+                skills: [
+                    "HTML",
+                    "CSS",
+                    "JavaScript",
+                    "Git"
+                ]
+            },
+
+            {
+                title: "Backend Developer",
+                type: "Backend Development",
+                skills: [
+                    "Python",
+                    "SQL",
+                    "Git",
+                    "Linux"
+                ]
+            },
+
+            {
+                title: "Full Stack Developer",
+                type: "Web Development",
+                skills: [
+                    "HTML",
+                    "CSS",
+                    "JavaScript",
+                    "Python",
+                    "SQL",
+                    "Git"
+                ]
+            },
+
+            {
+                title: "Software Developer",
+                type: "Software Development",
+                skills: [
+                    "C++",
+                    "Python",
+                    "SQL",
+                    "Git"
+                ]
+            },
+
+            {
+                title: "Java Developer",
+                type: "Software Development",
+                skills: [
+                    "Java",
+                    "SQL",
+                    "Git"
+                ]
+            },
+
+            {
+                title: "Data Analyst",
+                type: "Data & Analytics",
+                skills: [
+                    "Python",
+                    "SQL",
+                    "Excel",
+                    "Statistics"
+                ]
+            },
+
+            {
+                title: "Data Scientist",
+                type: "Data Science",
+                skills: [
+                    "Python",
+                    "SQL",
+                    "Statistics"
+                ]
+            },
+
+            {
+                title: "Cybersecurity Analyst",
+                type: "Cybersecurity",
+                skills: [
+                    "Linux",
+                    "Networking",
+                    "Python",
+                    "Git"
+                ]
+            },
+
+            {
+                title: "Cloud Engineer",
+                type: "Cloud Computing",
+                skills: [
+                    "Linux",
+                    "Networking",
+                    "Cloud",
+                    "Git"
+                ]
+            },
+
+            {
+                title: "DevOps Engineer",
+                type: "DevOps",
+                skills: [
+                    "Linux",
+                    "Git",
+                    "Docker",
+                    "Cloud"
+                ]
+            },
+
+            {
+                title: "UI/UX Designer",
+                type: "Design",
+                skills: [
+                    "Figma",
+                    "UI Design",
+                    "UX Design"
+                ]
+            }
+
+        ];
+
+
+        // ==========================================
+        // ANALYZE SKILLS
+        // ==========================================
+
+        function analyzeMySkills() {
+
+            let boxes =
+                document.querySelectorAll(
+                    ".skill-options input:checked"
+                );
+
+            let targetJob =
+                document.getElementById("targetJob").value;
+
+            let result =
+                document.getElementById("resultContent");
+
+            let recommendationBox =
+                document.getElementById("jobRecommendations");
+
+
+            // ==========================================
+            // CHECK SKILLS
+            // ==========================================
+
+            if (boxes.length === 0) {
+
+                result.innerHTML =
+                    "<div class='result-box'>" +
+                    "<p>Please select at least one skill.</p>" +
+                    "</div>";
+
+                recommendationBox.innerHTML = "";
+
+                return;
+            }
+
+
+            // ==========================================
+            // CHECK TARGET JOB
+            // ==========================================
+
+            if (targetJob === "") {
+
+                result.innerHTML =
+                    "<div class='result-box'>" +
+                    "<p>Please select a target job.</p>" +
+                    "</div>";
+
+                recommendationBox.innerHTML = "";
+
+                return;
+            }
+
+
+            // ==========================================
+            // GET USER SKILLS
+            // ==========================================
+
+            let mySkills = [];
+
+boxes.forEach(function(box) {
+    mySkills.push(box.value);
+});
+
+// Save selected skills for Jobs page
+localStorage.setItem(
+    "jobreadyskills",
+    JSON.stringify(mySkills)
+);
+
+
+            // ==========================================
+            // TARGET JOB REQUIREMENTS
+            // ==========================================
+
+            let required = [];
+
+            let jobName = "";
+
+
+            if (targetJob === "frontend") {
+
+                jobName = "Frontend Developer";
+
+                required = [
+                    "HTML",
+                    "CSS",
+                    "JavaScript",
+                    "Git"
+                ];
+
+            }
+
+            else if (targetJob === "backend") {
+
+                jobName = "Backend Developer";
+
+                required = [
+                    "Python",
+                    "SQL",
+                    "Git",
+                    "Linux"
+                ];
+
+            }
+
+            else if (targetJob === "fullstack") {
+
+                jobName = "Full Stack Developer";
+
+                required = [
+                    "HTML",
+                    "CSS",
+                    "JavaScript",
+                    "Python",
+                    "SQL",
+                    "Git"
+                ];
+
+            }
+
+            else if (targetJob === "software") {
+
+                jobName = "Software Developer";
+
+                required = [
+                    "C++",
+                    "Python",
+                    "SQL",
+                    "Git"
+                ];
+
+            }
+
+            else if (targetJob === "java") {
+
+                jobName = "Java Developer";
+
+                required = [
+                    "Java",
+                    "SQL",
+                    "Git"
+                ];
+
+            }
+
+            else if (targetJob === "dataanalyst") {
+
+                jobName = "Data Analyst";
+
+                required = [
+                    "Python",
+                    "SQL",
+                    "Excel",
+                    "Statistics"
+                ];
+
+            }
+
+            else if (targetJob === "datascientist") {
+
+                jobName = "Data Scientist";
+
+                required = [
+                    "Python",
+                    "SQL",
+                    "Statistics"
+                ];
+
+            }
+
+            else if (targetJob === "cyber") {
+
+                jobName = "Cybersecurity Analyst";
+
+                required = [
+                    "Linux",
+                    "Networking",
+                    "Python",
+                    "Git"
+                ];
+
+            }
+
+            else if (targetJob === "cloud") {
+
+                jobName = "Cloud Engineer";
+
+                required = [
+                    "Linux",
+                    "Networking",
+                    "Cloud",
+                    "Git"
+                ];
+
+            }
+
+            else if (targetJob === "devops") {
+
+                jobName = "DevOps Engineer";
+
+                required = [
+                    "Linux",
+                    "Git",
+                    "Docker",
+                    "Cloud"
+                ];
+
+            }
+
+            else if (targetJob === "uiux") {
+
+                jobName = "UI/UX Designer";
+
+                required = [
+                    "Figma",
+                    "UI Design",
+                    "UX Design"
+                ];
+
+            }
+
+
+            // ==========================================
+            // COMPARE SKILLS
+            // ==========================================
+
+            let have = [];
+
+            let missing = [];
+
+
+            for (
+                let i = 0;
+                i < required.length;
+                i++
+            ) {
+
+                if (
+                    mySkills.includes(
+                        required[i]
+                    )
+                ) {
+
+                    have.push(
+                        required[i]
+                    );
+
+                }
+
+                else {
+
+                    missing.push(
+                        required[i]
+                    );
+
+                }
+
+            }
+
+
+            // ==========================================
+            // CALCULATE TARGET JOB MATCH
+            // ==========================================
+
+            let percentage =
+                Math.round(
+                    (have.length /
+                        required.length) * 100
+                );
+
+
+            // ==========================================
+            // SHOW SKILL ANALYSIS
+            // ==========================================
+
+            result.innerHTML =
+
+                "<div class='result-box'>" +
+
+                "<h3>🎯 " +
+                jobName +
+                "</h3>" +
+
+                "<p>" +
+                "<strong>Skill Match:</strong> " +
+                percentage +
+                "%" +
+                "</p>" +
+
+                "</div>" +
+
+
+                "<div class='result-box'>" +
+
+                "<h3>✅ Skills You Have</h3>" +
+
+                "<p>" +
+
+                (
+                    have.length > 0
+                    ? have.join(", ")
+                    : "None"
+                ) +
+
+                "</p>" +
+
+                "</div>" +
+
+
+                "<div class='result-box'>" +
+
+                "<h3>📌 Skills to Improve</h3>" +
+
+                "<p>" +
+
+                (
+                    missing.length > 0
+                    ? missing.join(", ")
+                    : "You have all required skills!"
+                ) +
+
+                "</p>" +
+
+                "</div>" +
+
+
+                "<div class='result-box'>" +
+
+                "<h3>📚 Learning Roadmap</h3>" +
+
+                "<ul>" +
+
+                (
+                    missing.length > 0
+
+                    ?
+
+                    missing.map(
+                        function(skill) {
+
+                            return "<li>" +
+                                skill +
+                                "</li>";
+
+                        }
+                    ).join("")
+
+                    :
+
+                    "<li>Keep improving your skills!</li>"
+                ) +
+
+                "</ul>" +
+
+                "</div>";
+
+
+            // ==========================================
+            // AUTOMATIC JOB RECOMMENDATIONS
+            // ==========================================
+
+            showRecommendedJobs(mySkills);
+
+        }
+
+
+        // ==========================================
+        // SHOW RECOMMENDED JOBS
+        // ==========================================
+
+        function showRecommendedJobs(mySkills) {
+
+            let recommendationBox =
+                document.getElementById(
+                    "jobRecommendations"
+                );
+
+
+            let recommendations = [];
+
+
+            // Calculate match for every job
+            jobs.forEach(function(job) {
+
+                let matchedSkills =
+                    job.skills.filter(function(skill) {
+
+                        return mySkills.includes(skill);
+
+                    });
+
+
+                let matchPercentage =
+                    Math.round(
+                        (matchedSkills.length /
+                            job.skills.length) * 100
+                    );
+
+
+                // Only show jobs with matching skills
+                if (matchPercentage > 0) {
+
+                    recommendations.push({
+
+                        title: job.title,
+
+                        type: job.type,
+
+                        percentage: matchPercentage,
+
+                        matchedSkills: matchedSkills,
+
+                        totalSkills: job.skills.length
+
+                    });
+
+                }
+
+            });
+
+
+            // ==========================================
+            // SORT BY BEST MATCH
+            // ==========================================
+
+            recommendations.sort(function(a, b) {
+
+                return b.percentage -
+                    a.percentage;
+
+            });
+
+
+            // ==========================================
+            // NO JOB FOUND
+            // ==========================================
+
+            if (recommendations.length === 0) {
+
+                recommendationBox.innerHTML =
+
+                    "<div class='result-box'>" +
+
+                    "<h3>💼 Recommended Jobs</h3>" +
+
+                    "<p>" +
+                    "No matching jobs found. " +
+                    "Try selecting more skills." +
+                    "</p>" +
+
+                    "</div>";
+
+                return;
+            }
+
+
+            // ==========================================
+            // RECOMMENDATION HEADING
+            // ==========================================
+
+            let html =
+
+                "<div class='result-box'>" +
+
+                "<h2>💼 Recommended Jobs For You</h2>" +
+
+                "<p>" +
+                "These jobs are recommended based " +
+                "on the skills you selected." +
+                "</p>" +
+
+                "</div>";
+
+
+            // ==========================================
+            // JOB CARDS
+            // ==========================================
+
+            recommendations.forEach(function(job) {
+
+                html +=
+
+                    "<div class='result-box job-card'>" +
+
+                    "<h3>💼 " +
+                    job.title +
+                    "</h3>" +
+
+                    "<p>" +
+
+                    "<strong>Field:</strong> " +
+
+                    job.type +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<strong>Skill Match:</strong> " +
+
+                    "<span>" +
+
+                    job.percentage +
+
+                    "%</span>" +
+
+                    "</p>" +
+
+
+                    "<p>" +
+
+                    "<strong>Matching Skills:</strong> " +
+
+                    job.matchedSkills.join(", ") +
+
+                    "</p>" +
+
+
+                    "<a href='jobs.html?skills=" +
+
+                    encodeURIComponent(
+                        mySkills.join(",")
+                    ) +
+
+                    "' class='primary-btn'>" +
+
+                    "🔎 Find Jobs" +
+
+                    "</a>" +
+
+
+                    "</div>";
+
+            });
+
+
+            // ==========================================
+            // DISPLAY
+            // ==========================================
+
+            recommendationBox.innerHTML =
+                html;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

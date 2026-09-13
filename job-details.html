@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Job Details | JobReady</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <header>
+        <nav>
+
+            <div class="logo">
+                JobReady
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="resume.html">Resume Builder</a>
+                </li>
+
+                <li>
+                    <a href="skills.html">Skills</a>
+                </li>
+
+                <li>
+                    <a href="jobs.html">Jobs</a>
+                </li>
+
+            </ul>
+
+            <div class="nav-buttons">
+
+                <a href="login.html" class="login">
+                    Login
+                </a>
+
+                <a href="register.html" class="signup">
+                    Get Started
+                </a>
+
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="job-details-page">
+
+        <section id="jobDetails">
+
+            <!-- Job details will appear here -->
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h3>JobReady</h3>
+
+        <p>
+            From Student to Job-Ready.
+        </p>
+
+        <p>
+            © 2026 JobReady. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* =========================================
+           JOB DATA
+        ========================================= */
+
+        const jobs = {
+
+            "Frontend Developer": {
+
+                icon: "💻",
+
+                company: "Tech Solutions",
+
+                location: "Pune, India",
+
+                salary: "₹4 - ₹7 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Build responsive and interactive websites and user interfaces. Work with designers and developers to create user-friendly web applications.",
+
+                skills: [
+                    "HTML",
+                    "CSS",
+                    "JavaScript",
+                    "Git"
+                ]
+
+            },
+
+
+            "Backend Developer": {
+
+                icon: "⚙️",
+
+                company: "CodeWorks",
+
+                location: "Bangalore, India",
+
+                salary: "₹5 - ₹8 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Develop server-side applications, APIs and database systems that support modern web applications.",
+
+                skills: [
+                    "Python",
+                    "SQL",
+                    "Git",
+                    "Linux"
+                ]
+
+            },
+
+
+            "Full Stack Developer": {
+
+                icon: "🌐",
+
+                company: "Digital Innovations",
+
+                location: "Mumbai, India",
+
+                salary: "₹5 - ₹9 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Work on both frontend and backend technologies to build complete web applications.",
+
+                skills: [
+                    "HTML",
+                    "CSS",
+                    "JavaScript",
+                    "Python",
+                    "SQL",
+                    "Git"
+                ]
+
+            },
+
+
+            "Software Developer": {
+
+                icon: "💻",
+
+                company: "Software Labs",
+
+                location: "Pune, India",
+
+                salary: "₹4 - ₹8 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Design, develop and test software applications while solving programming and technical problems.",
+
+                skills: [
+                    "C++",
+                    "Python",
+                    "SQL",
+                    "Git"
+                ]
+
+            },
+
+
+            "Java Developer": {
+
+                icon: "☕",
+
+                company: "Enterprise Systems",
+
+                location: "Hyderabad, India",
+
+                salary: "₹4 - ₹8 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Develop and maintain applications using Java and related technologies.",
+
+                skills: [
+                    "Java",
+                    "SQL",
+                    "Git"
+                ]
+
+            },
+
+
+            "Data Analyst": {
+
+                icon: "📊",
+
+                company: "Data Insights",
+
+                location: "Mumbai, India",
+
+                salary: "₹4 - ₹7 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Analyze datasets, identify trends and create useful insights to support business decisions.",
+
+                skills: [
+                    "Python",
+                    "SQL",
+                    "Excel",
+                    "Statistics"
+                ]
+
+            },
+
+
+            "Data Scientist": {
+
+                icon: "📈",
+
+                company: "AI Analytics",
+
+                location: "Bangalore, India",
+
+                salary: "₹6 - ₹10 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Work with data, statistics and programming to build analytical and machine-learning solutions.",
+
+                skills: [
+                    "Python",
+                    "SQL",
+                    "Statistics"
+                ]
+
+            },
+
+
+            "Cybersecurity Analyst": {
+
+                icon: "🔐",
+
+                company: "SecureTech",
+
+                location: "Pune, India",
+
+                salary: "₹5 - ₹9 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Monitor systems and networks, identify security issues and help organizations improve their cybersecurity.",
+
+                skills: [
+                    "Linux",
+                    "Networking",
+                    "Python",
+                    "Git"
+                ]
+
+            },
+
+
+            "Cloud Engineer": {
+
+                icon: "☁️",
+
+                company: "Cloud Systems",
+
+                location: "Bangalore, India",
+
+                salary: "₹5 - ₹10 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Work with cloud infrastructure, services and deployment technologies.",
+
+                skills: [
+                    "Linux",
+                    "Networking",
+                    "Cloud",
+                    "Git"
+                ]
+
+            },
+
+
+            "DevOps Engineer": {
+
+                icon: "🚀",
+
+                company: "DevOps Technologies",
+
+                location: "Hyderabad, India",
+
+                salary: "₹5 - ₹10 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Automate development and deployment processes and help teams deliver applications efficiently.",
+
+                skills: [
+                    "Linux",
+                    "Git",
+                    "Docker",
+                    "Cloud"
+                ]
+
+            },
+
+
+            "UI/UX Designer": {
+
+                icon: "🎨",
+
+                company: "Creative Digital",
+
+                location: "Mumbai, India",
+
+                salary: "₹3 - ₹7 LPA",
+
+                experience: "Fresher / 0-2 Years",
+
+                description:
+                    "Design intuitive interfaces and user experiences for websites and digital applications.",
+
+                skills: [
+                    "Figma",
+                    "UI Design",
+                    "UX Design"
+                ]
+
+            }
+
+        };
+
+
+        /* =========================================
+           GET SELECTED JOB
+        ========================================= */
+
+        const params =
+            new URLSearchParams(window.location.search);
+
+        const jobName =
+            params.get("job");
+
+
+        const jobDetails =
+            document.getElementById("jobDetails");
+
+
+        /* =========================================
+           GET USER SKILLS
+        ========================================= */
+
+        let studentSkills = [];
+
+        try {
+
+            studentSkills =
+                JSON.parse(
+                    localStorage.getItem("jobreadyskills") || "[]"
+                );
+
+        } catch (error) {
+
+            studentSkills = [];
+
+        }
+
+
+        /* =========================================
+           DISPLAY JOB
+        ========================================= */
+
+        if (!jobName || !jobs[jobName]) {
+
+            jobDetails.innerHTML = `
+
+                <div class="job-details-card">
+
+                    <h1>Job Not Found</h1>
+
+                    <p>
+                        The selected job could not be found.
+                    </p>
+
+                    <a
+                        href="jobs.html"
+                        class="primary-btn"
+                    >
+                        ← Back to Jobs
+                    </a>
+
+                </div>
+
+            `;
+
+        } else {
+
+            const job = jobs[jobName];
+
+
+            /* Calculate match */
+
+            let matchedSkills = [];
+
+            let missingSkills = [];
+
+
+            job.skills.forEach(function(skill) {
+
+                if (studentSkills.includes(skill)) {
+
+                    matchedSkills.push(skill);
+
+                } else {
+
+                    missingSkills.push(skill);
+
+                }
+
+            });
+
+
+            const matchPercentage =
+                Math.round(
+                    (matchedSkills.length /
+                        job.skills.length) * 100
+                );
+
+
+            /* Display */
+
+            jobDetails.innerHTML = `
+
+                <div class="job-details-card">
+
+                    <a
+                        href="jobs.html"
+                        class="back-link"
+                    >
+                        ← Back to Jobs
+                    </a>
+
+
+                    <div class="job-title-area">
+
+                        <div class="job-icon">
+                            ${job.icon}
+                        </div>
+
+                        <div>
+
+                            <h1>
+                                ${job.name}
+                            </h1>
+
+                            <p>
+                                ${job.company}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="job-info-grid">
+
+                        <div>
+                            <strong>📍 Location</strong>
+                            <span>${job.location}</span>
+                        </div>
+
+                        <div>
+                            <strong>💰 Salary</strong>
+                            <span>${job.salary}</span>
+                        </div>
+
+                        <div>
+                            <strong>🎓 Experience</strong>
+                            <span>${job.experience}</span>
+                        </div>
+
+                        <div>
+                            <strong>📊 Skill Match</strong>
+                            <span>${matchPercentage}%</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="job-detail-section">
+
+                        <h2>About the Role</h2>
+
+                        <p>
+                            ${job.description}
+                        </p>
+
+                    </div>
+
+
+                    <div class="job-detail-section">
+
+                        <h2>
+                            🛠 Required Skills
+                        </h2>
+
+                        <div class="skill-list">
+
+                            ${job.skills.map(skill => `
+                                <span class="skill-tag">
+                                    ${skill}
+                                </span>
+                            `).join("")}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="job-detail-section">
+
+                        <h2>
+                            ✅ Your Matching Skills
+                        </h2>
+
+                        ${
+                            matchedSkills.length > 0
+                            ?
+                            `
+                            <div class="skill-list">
+
+                                ${matchedSkills.map(skill => `
+                                    <span class="skill-tag matched">
+                                        ✓ ${skill}
+                                    </span>
+                                `).join("")}
+
+                            </div>
+                            `
+                            :
+                            `
+                            <p>
+                                No matching skills yet.
+                            </p>
+                            `
+                        }
+
+                    </div>
+
+
+                    <div class="job-detail-section">
+
+                        <h2>
+                            📚 Skills You Need to Learn
+                        </h2>
+
+                        ${
+                            missingSkills.length > 0
+                            ?
+                            `
+                            <div class="skill-list">
+
+                                ${missingSkills.map(skill => `
+                                    <span class="skill-tag missing">
+                                        ${skill}
+                                    </span>
+                                `).join("")}
+
+                            </div>
+                            `
+                            :
+                            `
+                            <p>
+                                🎉 You have all the required skills!
+                            </p>
+                            `
+                        }
+
+                    </div>
+
+
+                    <div class="job-actions">
+
+                        <a
+                            href="Roadmap.html"
+                            class="primary-btn"
+                        >
+                            📚 View Learning Roadmap
+                        </a>
+
+
+                        <button
+                            onclick="alert('Application feature will be connected to real job listings later.')"
+                        >
+                            🚀 Apply Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
