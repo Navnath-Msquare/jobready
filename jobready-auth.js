@@ -813,7 +813,7 @@ function handleJobReadyLogin(event, emailId, passId, btnId, msgId) {
             
             // Redirect after 1.5s
             setTimeout(() => {
-                window.location.href = "dashboard.html";
+                window.location.href = "skills.html";
             }, 1500);
             
         } catch(e) {
