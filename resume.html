@@ -2,36 +2,71 @@
 <html lang="en">
 
 <head>
+    <script>
+        // Route Protection: Redirect to login if user is not authenticated
+        if (!localStorage.getItem("jobreadyUser")) {
+            window.location.replace("login.html");
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>JobReady | Resume Builder</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 
 <body>
 
     <!-- ================= NAVIGATION ================= -->
-    <header>
-        <nav>
-            <div class="logo">JobReady</div>
-
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="resume.html" class="active">Resume Builder</a></li>
-                <li><a href="jobs.html">Jobs</a></li>
-                <li><a href="skills.html">Skills</a></li>
-            </ul>
-        </nav>
-    </header>
+    <header class="navbar" id="mainNavbar">
+  <nav>
+    <a href="index.html" class="jr-logo" id="logoLink">
+      <div class="jr-orbit-logo">
+      <div class="jr-orbit-ring red-ring"></div>
+      <div class="jr-orbit-ring blue-ring"></div>
+      <div class="jr-orbit-text">JR</div>
+    </div>
+      <div class="jr-logo-text">
+        <span class="jr-logo-name">Job<span>Ready</span></span>
+        <span class="jr-logo-tag">Student to Hired</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="resume.html" class="nav-link active">Resume Builder</a></li>
+      <li><a href="jobs.html" class="nav-link ">Jobs</a></li>
+      <li><a href="skills.html" class="nav-link ">Skills</a></li>
+      <li class="mobile-nav-btn-wrapper"><button class="jr-cta-btn mobile-nav-btn" onclick="window.location.href='index.html#auth'" style="width:100%; justify-content:center; margin-top: 15px; padding: 12px 0; border:none; border-radius:8px; background: linear-gradient(135deg, #0ea5e9, #4f46e5);"><span style="color: white; font-weight: bold;">Job Ready</span></button></li>
+      <li class="mobile-nav-btn-wrapper admin-btn-wrapper"><button onclick="window.location.href='admin.html'" class="jr-cta-btn admin-panel-btn" style="width:100%; justify-content:center; margin-top: 10px; padding: 12px 0; background: linear-gradient(135deg, #4f46e5, #7e22ce); border:none; border-radius:8px; box-shadow: 0 4px 10px rgba(79,70,229,0.3);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="margin-right:8px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span style="color: white; font-weight: bold;">Admin Panel</span></button></li>
+    </ul>
+    <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+      <div class="premium-nav-group desktop-only">
+        <button class="p-btn p-admin" onclick="window.location.href='admin.html'">
+          <svg class="admin-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span class="btn-text">Admin</span>
+          <span class="arrow" style="display:none; margin-left:5px;">&rarr;</span>
+        </button>
+        <button class="p-btn p-jobready" onclick="window.location.href='index.html#auth'">
+          <span class="btn-text">Job Ready</span>
+          <span class="arrow" style="margin-left:5px;">&rarr;</span>
+        </button>
+      </div>
+      <button class="hamburger-btn" id="hamburgerBtn" onclick="document.getElementById('navLinks').classList.toggle('active'); this.classList.toggle('open');" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
 
 
     <!-- ================= PAGE HEADING ================= -->
     <main class="resume-page">
 
         <section class="resume-heading">
-            <span class="resume-badge">✨ RESUME BUILDER</span>
+            <span class="resume-badge"> RESUME BUILDER</span>
 
             <h1>Build Your <span>Professional Resume</span></h1>
 
@@ -57,7 +92,7 @@
                 <!-- PERSONAL INFORMATION -->
                 <div class="resume-section">
 
-                    <h3>👤 Personal Information</h3>
+                    <h3> Personal Information</h3>
 
                     <div class="input-grid">
 
@@ -117,7 +152,7 @@
                 <!-- PROFESSIONAL SUMMARY -->
                 <div class="resume-section">
 
-                    <h3>📝 Professional Summary</h3>
+                    <h3>Professional Summary</h3>
 
                     <textarea
                         id="summary"
@@ -147,7 +182,7 @@ CGPA: 8.5"></textarea>
                 <!-- ================= SKILLS ================= -->
                 <div class="resume-section">
 
-                    <h3>🧩 Skills</h3>
+                    <h3> Skills</h3>
 
                     <p class="section-help">
                         Start typing a skill and select a suggestion.
@@ -187,7 +222,7 @@ CGPA: 8.5"></textarea>
 
                     <div class="section-heading-row">
                         <div>
-                            <h3>💼 Projects</h3>
+                            <h3> Projects</h3>
                             <p class="section-help">
                                 Add your important academic or personal projects.
                             </p>
@@ -284,7 +319,7 @@ CGPA: 8.5"></textarea>
                 <!-- ACHIEVEMENTS -->
                 <div class="resume-section">
 
-                    <h3>🏆 Achievements</h3>
+                    <h3> Achievements</h3>
 
                     <textarea
                         id="achievements"
@@ -304,14 +339,14 @@ CGPA: 8.5"></textarea>
                         class="primary-btn"
                         type="button"
                         onclick="generateResume()">
-                        ✨ Generate Resume
+                         Generate Resume
                     </button>
 
                     <button
                         class="download-btn"
                         type="button"
                         onclick="downloadResume()">
-                        📄 Download Resume as PDF
+                         Download Resume as PDF
                     </button>
                     
                     <button onclick="clearResumeData()">clear Resume Data</button>
@@ -442,6 +477,12 @@ CGPA: 8.5"></textarea>
 
     <script src="script.js"></script>
 
+
+<!-- Global Back Button -->
+<button onclick="history.back()" class="global-back-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back
+</button>
 </body>
 
 </html>

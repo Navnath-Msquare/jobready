@@ -1,0 +1,11 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+    <defs>
+        <linearGradient id='textGrad' x1='0%' y1='0%' x2='100%' y2='100%'>
+            <stop offset='0%' stop-color='#2563eb' />
+            <stop offset='100%' stop-color='#0ea5e9' />
+        </linearGradient>
+    </defs>
+    <path d='M 15 50 A 35 35 0 0 0 85 50' fill='none' stroke='#3b82f6' stroke-width='8' transform='rotate(-25 50 50)' />
+    <path d='M 15 50 A 35 35 0 0 1 85 50' fill='none' stroke='#ef4444' stroke-width='8' transform='rotate(-25 50 50)' />
+    <text x='48' y='68' font-family='Arial Black, sans-serif' font-size='50' font-weight='900' font-style='italic' text-anchor='middle' fill='url(#textGrad)'>JR</text>
+</svg>

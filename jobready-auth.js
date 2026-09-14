@@ -320,7 +320,7 @@ Welcome to the Job Ready family! From student to job-ready starts here.
 
 Best regards,
 komal khatake & The Job Ready Team
-Direct Contact / WhatsApp: +91 9975124732
+Direct Contact / WhatsApp: +91 9975124734
 Admin Email: komalkhatake50@gmail.com`;
 
     // Prepare Payload for FormSubmit (Dispatches to komalkhatake50@gmail.com and auto-responds to user)
